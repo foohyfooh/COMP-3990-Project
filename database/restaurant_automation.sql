@@ -1,0 +1,158 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+CREATE DATABASE IF NOT EXISTS `restaurant_automation` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `restaurant_automation`;
+
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+TRUNCATE TABLE `category`;
+DROP TABLE IF EXISTS `ingredients`;
+CREATE TABLE `ingredients` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `stock` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+TRUNCATE TABLE `ingredients`;
+DROP TABLE IF EXISTS `menu_item`;
+CREATE TABLE `menu_item` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `category` int(11) NOT NULL,
+  `cost` decimal(5,2) NOT NULL,
+  `description` varchar(80) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+TRUNCATE TABLE `menu_item`;
+DROP TABLE IF EXISTS `menu_item_ingredient`;
+CREATE TABLE `menu_item_ingredient` (
+  `menu_item` int(11) NOT NULL,
+  `ingredient` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+TRUNCATE TABLE `menu_item_ingredient`;
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `session` varchar(36) NOT NULL,
+  `timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_item_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+TRUNCATE TABLE `orders`;
+DROP TABLE IF EXISTS `order_items`;
+CREATE TABLE `order_items` (
+  `id` int(11) NOT NULL,
+  `order` int(11) NOT NULL,
+  `menu_item` int(11) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+TRUNCATE TABLE `order_items`;
+DROP TABLE IF EXISTS `review`;
+CREATE TABLE `review` (
+  `id` varchar(36) NOT NULL,
+  `rating` int(3) NOT NULL,
+  `comment` varchar(80) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+TRUNCATE TABLE `review`;
+DROP TABLE IF EXISTS `session`;
+CREATE TABLE `session` (
+  `id` varchar(36) NOT NULL DEFAULT '(SELECT UUID())',
+  `table` int(5) NOT NULL,
+  `timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_action_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+TRUNCATE TABLE `session`;
+DROP TABLE IF EXISTS `status`;
+CREATE TABLE `status` (
+  `id` int(11) NOT NULL,
+  `description` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+TRUNCATE TABLE `status`;
+INSERT INTO `status` (`id`, `description`) VALUES
+(1, 'Ordered'),
+(2, 'Preparing'),
+(3, 'Ready'),
+(4, 'Cancelled'),
+(5, 'At Table'),
+(6, 'Picked Up');
+
+
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `ingredients`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `menu_item`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `category_idx` (`category`);
+
+ALTER TABLE `menu_item_ingredient`
+  ADD PRIMARY KEY (`menu_item`,`ingredient`),
+  ADD KEY `ingredient_used_idx` (`ingredient`);
+
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `session_idx` (`session`);
+
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_idx` (`order`),
+  ADD KEY `menu_item_idx` (`menu_item`),
+  ADD KEY `status_idx` (`status`);
+
+ALTER TABLE `review`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `session`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ingredients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `menu_item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `menu_item`
+  ADD CONSTRAINT `category` FOREIGN KEY (`category`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `menu_item_ingredient`
+  ADD CONSTRAINT `ingredient_used` FOREIGN KEY (`ingredient`) REFERENCES `ingredients` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `menu_item_using` FOREIGN KEY (`menu_item`) REFERENCES `menu_item` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `orders`
+  ADD CONSTRAINT `session` FOREIGN KEY (`session`) REFERENCES `session` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `menu_item` FOREIGN KEY (`menu_item`) REFERENCES `menu_item` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `order` FOREIGN KEY (`order`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `status` FOREIGN KEY (`status`) REFERENCES `status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `review`
+  ADD CONSTRAINT `id` FOREIGN KEY (`id`) REFERENCES `session` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
