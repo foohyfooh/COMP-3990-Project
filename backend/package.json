@@ -1,0 +1,11 @@
+{
+  "name": "restaurant-automation-backend",
+  "version": "0.0.1",
+  "description": "Backend for Restaurant Automation Service",
+  "main": "main.js",
+  "author": "Jonathan Herbert",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}

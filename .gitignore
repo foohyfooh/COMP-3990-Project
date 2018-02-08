@@ -198,3 +198,9 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 
 # End of Ionic .gitignore contents
+
+# Backend 
+
+backend/config.json
+
+# End of Backend 
