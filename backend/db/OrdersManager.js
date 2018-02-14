@@ -3,26 +3,35 @@ const {STATUS_ORDERING} = require('./StatusConstants');
 
 class OrdersManager extends DatabaseManager {
 
-  getCustomerOrders(){
-    return Promise.resolve(null);
-  }
-
+  /**
+   * Create an order associagted wit the session
+   * @param {number} sessionId The session to which this order is associated with
+   */
   startOrder(sessionId){
     return this._query(`
-    INSERT INTO orders (session)
-    VALUES ('${sessionId}');
+    INSERT INTO orders (\`session\`)
+    VALUES (${sessionId});
     `);
   }
 
+  /**
+   * Return all the menu items that were ordered
+   * @param {number} orderId The order whose items to get
+   */
   getOrderItems(orderId){
     return this._query(`
-    SELECT menu_item.name, menu_item.cost, order_item.status
+    SELECT menu_item.name AS name, menu_item.cost AS cost, order_item.status AS status
     FROM order_item
     JOIN menu_item ON menu_item.id = order_item.menu_item
     WHERE order_items.order = ${orderId}
     `);
   }
 
+  /**
+   * Add an item to the order
+   * @param {number} orderId The order to add the menu item
+   * @param {number} menuItemId The menu item to add the the order
+   */
   addItemToOrders(orderId, menuItemId){
     return this._query(`
     INSERT INTO order_item (order, menu_item, status)
@@ -30,6 +39,10 @@ class OrdersManager extends DatabaseManager {
     `);
   }
 
+  /**
+   * Get the cost for all the menu items ordered
+   * @param {number} orderId 
+   */
   getOrderTotal(orderId){
     return this._query(`
     SELECT SUM(menu_item.cost)
