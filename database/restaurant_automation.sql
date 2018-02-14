@@ -73,7 +73,8 @@ CREATE TABLE `menu_item_ingredient` (
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `session` varchar(36) NOT NULL,
+  `session` int(11) NOT NULL,
+  `paid` bit(1) NOT NULL DEFAULT b'0',
   `timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_item_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -100,7 +101,7 @@ CREATE TABLE `order_items` (
 
 DROP TABLE IF EXISTS `review`;
 CREATE TABLE `review` (
-  `id` varchar(36) NOT NULL,
+  `id` int(11) NOT NULL,
   `rating` int(3) NOT NULL,
   `comment` varchar(80) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -113,8 +114,10 @@ CREATE TABLE `review` (
 
 DROP TABLE IF EXISTS `session`;
 CREATE TABLE `session` (
-  `id` varchar(36) NOT NULL DEFAULT '',
+  `id` int(11) NOT NULL,
+  `uuid` varchar(36) NOT NULL DEFAULT '',
   `table` int(5) NOT NULL,
+  `paid` bit(1) NOT NULL DEFAULT b'0',
   `timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_action_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -125,7 +128,16 @@ CREATE TABLE `session` (
 DROP TRIGGER IF EXISTS `insertSessionUUID`;
 DELIMITER $$
 CREATE TRIGGER `insertSessionUUID` BEFORE INSERT ON `session` FOR EACH ROW BEGIN
-	SET NEW.id = UUID();
+	SET NEW.uuid = UUID();
+END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `updatePaidBitForSessionOrders`;
+DELIMITER $$
+CREATE TRIGGER `updatePaidBitForSessionOrders` AFTER UPDATE ON `session` FOR EACH ROW BEGIN
+	IF NEW.paid = 1 THEN
+		UPDATE orders SET paid = b'1' WHERE `session` = NEW.id;
+    END IF;
 END
 $$
 DELIMITER ;
@@ -142,6 +154,11 @@ CREATE TABLE `status` (
   `description` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `status`
+--
+
+TRUNCATE TABLE `status`;
 --
 -- Dumping data for table `status`
 --
@@ -210,7 +227,8 @@ ALTER TABLE `review`
 -- Indexes for table `session`
 --
 ALTER TABLE `session`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uuid_UNIQUE` (`uuid`);
 
 --
 -- Indexes for table `status`
@@ -241,6 +259,11 @@ ALTER TABLE `menu_item`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `session`
+--
+ALTER TABLE `session`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
