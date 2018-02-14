@@ -11,7 +11,7 @@ class SessionManager extends DatabaseManager {
     INSERT INTO session(\`table\`)
     VALUES (${table})
     `);
-    return (this._query(`
+    return (await this._query(`
     SELECT id, uuid
     FROM \`session\`
     WHERE id = ${insertResult.insertId}
