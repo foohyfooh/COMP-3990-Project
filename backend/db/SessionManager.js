@@ -13,7 +13,7 @@ class SessionManager extends DatabaseManager {
     `);
     return (this._query(`
     SELECT id, uuid
-    FROM session
+    FROM \`session\`
     WHERE id = ${insertResult.insertId}
     `))[0];
   }

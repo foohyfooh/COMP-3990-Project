@@ -37,9 +37,9 @@ class DatabaseManager {
    * Disconnect from the MySQL database
   */
   disconnect(){
-    if(this._connection)
-      this._connection.end();
-    return Promise.reject('Cannot disconnect from an unsestablished connection')
+    if(!this._connection)
+      return Promise.reject('Cannot disconnect from an unsestablished connection');
+    this._connection.end();
   }
 
 };

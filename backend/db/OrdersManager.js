@@ -7,11 +7,12 @@ class OrdersManager extends DatabaseManager {
    * Create an order associagted wit the session
    * @param {number} sessionId The session to which this order is associated with
    */
-  startOrder(sessionId){
-    return this._query(`
+  async startOrder(sessionId){
+    let insertResult = await this._query(`
     INSERT INTO orders (\`session\`)
-    VALUES (${sessionId});
+    VALUES (${sessionId})
     `);
+    return insertResult.insertId;
   }
 
   /**

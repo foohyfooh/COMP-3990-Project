@@ -16,7 +16,7 @@ class CheckoutManager extends DatabaseManager {
 
   /**
    * Perform a checkout for a takeout session
-   * @param {string} sessionUUID 
+   * @param {string} sessionUUID The session to checkout
    */
   async checkoutTakeoutSession(sessionUUID){
     let session = await this._query(`
