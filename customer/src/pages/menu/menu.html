@@ -1,12 +1,10 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title>menu</ion-title>
+    <ion-title>Menu</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-
+  <div id="category-container">
+      <menu-category *ngFor="let category of categories" [id]="category.id" [name]="category.name" [count]="category.count"></menu-category>
+  </div>
 </ion-content>

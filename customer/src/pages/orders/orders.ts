@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
+import { SessionManagerProvider } from '../../providers/session-manager';
+import { MenuPage } from '../menu/menu';
+import { CheckoutPage } from '../checkout/checkout';
 
 @IonicPage()
 @Component({
@@ -8,11 +11,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class OrdersPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  orderItems: OrderItem[];
+
+  constructor(private navCtrl: NavController, private sessionManager: SessionManagerProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad OrdersPage');
+  async ionViewDidLoad() {
+    this.orderItems = await this.sessionManager.getOrderItems();
+  }
+
+  gotoMenu(){
+    this.navCtrl.push(MenuPage);
+  }
+  
+  gotoCheckout(){
+    this.navCtrl.push(CheckoutPage);
   }
 
 }

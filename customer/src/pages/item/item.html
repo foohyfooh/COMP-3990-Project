@@ -1,12 +1,10 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title>item</ion-title>
+    <ion-title>{{itemName}}</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-
+  {{itemName}} <br>
+  Cost: ${{itemCost}}
+  <button ion-button full (click)="orderItem()">Order {{itemName}}</button>  
 </ion-content>

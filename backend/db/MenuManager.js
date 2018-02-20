@@ -7,10 +7,11 @@ class MenuManager extends DatabaseManager {
   */
   getCategories(){
     return this._query(`
-    SELECT category.id AS id, category.name, COUNT(menu_item.category) 
+    SELECT category.id, category.name, COUNT(menu_item.category) AS count 
     FROM category 
-    JOIN menu_item ON category.id = menu_item.category
+    LEFT JOIN menu_item ON category.id = menu_item.category
     GROUP BY category.name
+    ORDER BY category.id
     `);
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'order-item',
@@ -6,11 +6,13 @@ import { Component } from '@angular/core';
 })
 export class OrderItemComponent {
 
-  text: string;
+  @Input() id: number;
+  @Input() name: string;
+  @Input() cost: number;
+  @Input() status: number;
+  private statusText: number;
 
   constructor() {
-    console.log('Hello OrderItemComponent Component');
-    this.text = 'Hello World';
   }
 
 }

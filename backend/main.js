@@ -1,11 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use(bodyParser.json());
 const {SessionManager, OrdersManager, MenuManager, SubMenuManager, ItemManager, CheckoutManager} = require('./db');
 
 //Start a session
-app.post('/session/', async (req, res) => {
+app.post('/session', async (req, res) => {
   let table = req.body.table;
   try{
     let sessionManager = new SessionManager();
@@ -19,7 +24,7 @@ app.post('/session/', async (req, res) => {
 });
 
 //Start an order
-app.post('/order/', async (req, res) => {
+app.post('/order', async (req, res) => {
   let sessionId = req.body.sessionId;
   try{
     let ordersManager = new OrdersManager();
@@ -47,22 +52,24 @@ app.get('/order/:orderId', async (req, res) => {
 });
 
 //Add Item to Order
-app.post('/order/:orderId/add_item/', async (req, res) => {
-  let orderId = req.body.orderId;
+app.post('/order/:orderId/add_item', async (req, res) => {
+  let orderId = req.params.orderId;
   let menuItemId = req.body.menuItemId;
   try{
     let ordersManager = new OrdersManager();
     await ordersManager.connect();
     await ordersManager.addItemToOrders(orderId, menuItemId);
-    menuManager.disconnect();
-    res.send('Item Added');
+    ordersManager.disconnect();
+    res.json({
+      'message': 'Item Added'
+    });
   }catch(e){
     res.status(500).json(e);
   }
 });
 
 //Display all menu categories
-app.get('/menu', async (res, req) => {
+app.get('/menu', async (req, res) => {
   try{
     let menuManager = new MenuManager();
     await menuManager.connect();
@@ -103,14 +110,16 @@ app.get('/menu/item/:itemId', async (req, res) => {
 });
 
 //Do the checkout for the orders of a session
-app.post('/session/checkout/:sessionId', async (req, res) => {
-  let sessionId = req.params.sessionId;
+app.post('/session/checkout/', async (req, res) => {
+  let sessionId = req.body.sessionId;
   try{
     let checkoutManager = new CheckoutManager();
     await checkoutManager.connect();
     checkoutManager.checkoutSession(sessionId);
     checkoutManager.disconnect();
-    res.send('Checkout Complete');
+    res.json({
+      'message': 'Checkout Complete'
+    });
   }catch(e){
     res.status(500).json(e);
   }

@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Enter Table Number</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <label for="table">Table Number</label>
+  <input #table type="number" id="table">
+  <button ion-button full (click)="submit()">Enter Table Number</button>
+  <button ion-button color="danger" full (click)="close()">Go Back</button>
+</ion-content>

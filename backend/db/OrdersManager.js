@@ -21,9 +21,9 @@ class OrdersManager extends DatabaseManager {
    */
   getOrderItems(orderId){
     return this._query(`
-    SELECT menu_item.name AS name, menu_item.cost AS cost, order_item.status AS status
-    FROM order_item
-    JOIN menu_item ON menu_item.id = order_item.menu_item
+    SELECT menu_item.id, menu_item.name AS name, menu_item.cost AS cost, order_items.status AS status
+    FROM order_items
+    JOIN menu_item ON menu_item.id = order_items.menu_item
     WHERE order_items.order = ${orderId}
     `);
   }
@@ -35,7 +35,7 @@ class OrdersManager extends DatabaseManager {
    */
   addItemToOrders(orderId, menuItemId){
     return this._query(`
-    INSERT INTO order_item (order, menu_item, status)
+    INSERT INTO order_items (\`order\`, menu_item, status)
     VALUES(${orderId}, ${menuItemId}, ${STATUS_ORDERING})
     `);
   }
