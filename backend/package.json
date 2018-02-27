@@ -4,6 +4,9 @@
   "description": "Backend for Restaurant Automation Service",
   "main": "main.js",
   "author": "Jonathan Herbert",
+  "scripts": {
+    "serve": "node main.js"
+  },
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",

@@ -111,11 +111,11 @@ app.get('/menu/item/:itemId', async (req, res) => {
 
 //Do the checkout for the orders of a session
 app.post('/session/checkout/', async (req, res) => {
-  let sessionId = req.body.sessionId;
+  let session = req.body.session;
   try{
     let checkoutManager = new CheckoutManager();
     await checkoutManager.connect();
-    checkoutManager.checkoutSession(sessionId);
+    checkoutManager.checkoutSession(session);
     checkoutManager.disconnect();
     res.json({
       'message': 'Checkout Complete'
@@ -125,20 +125,7 @@ app.post('/session/checkout/', async (req, res) => {
   }
 });
 
-app.post('/session/takeout_checkout/:sessionUUID', async (req, res) => {
-  let sessionUUID = req.params.sessionUUID;
-  try{
-    let checkoutManager = new CheckoutManager();
-    await checkoutManager.connect();
-    checkoutManager.checkoutTakeoutSession(sessionUUID);
-    checkoutManager.disconnect();
-    res.send('Checkout Complete');
-  }catch(e){
-    res.status(500).json(e);
-  }
-});
-
 //Start the server
-app.listen(8080, async () => {
+app.listen(8080, () => {
   console.log('Listening on port 8080');
 });

@@ -4,9 +4,17 @@ class CheckoutManager extends DatabaseManager {
 
   /**
    * Checkout the order(s) associated with this session
-   * @param {number} sessionId The session to checkout
+   * @param {number | string} session The session(id or uuid) to checkout
    */
-  checkoutSession(sessionId){
+  async checkoutSession(session){
+    return typeof(session) === 'number' ? this.checkoutSessionUsingId(session) : this.checkoutSessionUsingUUID(session);
+  }
+
+  /**
+   * Checkout the order(s) associated with this session
+   * @param {number} sessionId The session id to
+   */
+  checkoutSessionUsingId(sessionId){
     return this._query(`
     UPDATE \`session\`
     SET paid = b'1'
@@ -15,18 +23,16 @@ class CheckoutManager extends DatabaseManager {
   }
 
   /**
-   * Perform a checkout for a takeout session
-   * @param {string} sessionUUID The session to checkout
+   * Checkout the order(s) associated with this session
+   * @param {string} sessionUUID The session id to
    */
-  async checkoutTakeoutSession(sessionUUID){
-    let session = await this._query(`
-    SELECT id
-    FROM \`session\`
-    WHERE uuid = ${sessionUUID}
+  checkoutSessionUsingUUID(sessionUUID){
+    return this._query(`
+    UPDATE \`session\`
+    SET paid = b'1'
+    WHERE uuid = '${sessionUUID}'
     `);
-    return this.checkoutSession(session[0].id);
   }
-
   
 }
 

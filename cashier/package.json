@@ -1,0 +1,15 @@
+{
+  "name": "restuarant-automation-cashier",
+  "version": "0.0.1",
+  "description": "Cashier System for Restaurant Automation Service",
+  "main": "main.js",
+  "scripts": {
+    "serve": "node main.js"
+  },
+  "author": "Jonathan Herbert",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2",
+    "qrcode-reader": "^1.0.4"
+  }
+}
