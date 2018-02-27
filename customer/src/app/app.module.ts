@@ -12,7 +12,6 @@ import { MenuPage } from '../pages/menu/menu';
 import { SubMenuPage } from '../pages/submenu/submenu';
 import { ItemPage } from '../pages/item/item';
 import { OrdersPage } from '../pages/orders/orders';
-import { CheckoutPage } from '../pages/checkout/checkout';
 import { StateProvider } from '../providers/state';
 import { TableEntryComponent } from '../components/table-entry/table-entry';
 import { SessionManagerProvider } from '../providers/session-manager';
@@ -21,6 +20,7 @@ import { MenuCategoryComponent } from '../components/menu-category/menu-category
 import { SubMenuManagerProvider } from '../providers/submenu-manager';
 import { MenuItemComponent } from '../components/menu-item/menu-item';
 import { OrderItemComponent } from '../components/order-item/order-item';
+import { QrScreenComponent } from '../components/qr-screen/qr-screen';
 
 @NgModule({
   declarations: [
@@ -31,11 +31,11 @@ import { OrderItemComponent } from '../components/order-item/order-item';
     SubMenuPage,
     ItemPage,
     OrdersPage,
-    CheckoutPage,
     TableEntryComponent,
     MenuCategoryComponent,
     MenuItemComponent,
-    OrderItemComponent
+    OrderItemComponent,
+    QrScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +52,7 @@ import { OrderItemComponent } from '../components/order-item/order-item';
     SubMenuPage,
     ItemPage,
     OrdersPage,
-    CheckoutPage
+    QrScreenComponent
   ],
   providers: [
     StatusBar,

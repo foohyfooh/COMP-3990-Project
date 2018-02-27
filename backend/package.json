@@ -4,6 +4,7 @@
   "description": "Backend for Restaurant Automation Service",
   "main": "main.js",
   "author": "Jonathan Herbert",
+  "private": true,
   "scripts": {
     "serve": "node main.js"
   },

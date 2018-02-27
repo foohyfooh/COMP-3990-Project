@@ -20,8 +20,8 @@ export class SessionManagerProvider {
   }
 
   /**
-   * 
-   * @param sessionId 
+   * Create an order associated with a session
+   * @param sessionId The session for which to create an order
    */
   public async createOrder(sessionId: number){
     let order = await this.http.post<Order>('http://localhost:8080/order', {sessionId}).toPromise();
@@ -29,6 +29,10 @@ export class SessionManagerProvider {
     return order;
   }
 
+  /**
+   * Add an item to the order
+   * @param itemId The item to add to your order
+   */
   public async addItemToOrder(itemId: number){
     let orderId = this.state.getOrder().order;
     return this.http.post(`http://localhost:8080/order/${orderId}/add_item/`, {
@@ -36,16 +40,12 @@ export class SessionManagerProvider {
     }).toPromise();
   }
 
+  /** 
+   * Get the items within an order
+  */
   public async getOrderItems(){
     let orderId = this.state.getOrder().order;
     return this.http.get<OrderItem[]>(`http://localhost:8080/order/${orderId}`).toPromise();
-  }
-
-  public async checkoutSession(){
-    let sessionId = this.state.getSessionInfo().id;
-    return this.http.post(`http://localhost:8080/session/checkout`, {
-      sessionId: sessionId
-    }).toPromise();
   }
 
 }
