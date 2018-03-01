@@ -4,7 +4,7 @@ import { SessionManagerProvider } from '../../providers/session-manager';
 import { MenuPage } from '../menu/menu';
 import { QrScreenComponent } from '../../components/qr-screen/qr-screen';
 import { StateProvider } from '../../providers/state';
-declare const QRCode;
+declare const QRCodeGenerator;
 
 @IonicPage()
 @Component({
@@ -29,7 +29,7 @@ export class OrdersPage {
 
   async generateQRCode(){
     try{
-      let code = QRCode.toDataURL(this.state.getSessionInfo().uuid);
+      let code = QRCodeGenerator.toDataURL(this.state.getSessionInfo().uuid);
       console.log(code);
       return code;
     }catch(e){
