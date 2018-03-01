@@ -47,6 +47,11 @@
     const QRCodeGenerator = QRCode;
     delete QRCode;
   </script>
+  <script src="assets/qrcoder-reader.min.js"></script>
+  <script>
+    const QRCodeReader = QrCode;
+    delete QrCode;
+  </script>
 
   <!-- The main bundle js is generated during the build process -->
   <script src="build/main.js"></script>

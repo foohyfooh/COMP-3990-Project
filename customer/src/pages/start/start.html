@@ -4,6 +4,8 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <div id="camera"></div>
+  <div id="cameraContainer">
+    <video #camera id="camera"></video>
+  </div>
   <button ion-button full (click)="openTableNumberModal()">Enter Table #</button>
 </ion-content>

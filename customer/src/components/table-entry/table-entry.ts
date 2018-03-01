@@ -17,12 +17,12 @@ export class TableEntryComponent {
 
   }
 
-  submit(){
+  async submit(){
     let tableValue = this.tableInput.nativeElement.value;
     if(tableValue === '') return;
     let table = Number.parseInt(tableValue);
     this.state.seTable(table);
-    this.sessionManager.createSession(table);
+    await this.sessionManager.createSession(table);
     this.navCtrl.push(MenuPage);
   }
 
