@@ -33,11 +33,12 @@ class OrdersManager extends DatabaseManager {
    * @param {number} orderId The order to add the menu item
    * @param {number} menuItemId The menu item to add the the order
    */
-  addItemToOrders(orderId, menuItemId){
-    return this._query(`
+  async addItemToOrder(orderId, menuItemId){
+    let insertResult = await this._query(`
     INSERT INTO order_items (\`order\`, menu_item, status)
     VALUES(${orderId}, ${menuItemId}, ${STATUS_ORDERING})
     `);
+    return insertResult.insertId;
   }
 
   /**
@@ -46,11 +47,31 @@ class OrdersManager extends DatabaseManager {
    */
   getOrderTotal(orderId){
     return this._query(`
-    SELECT SUM(menu_item.cost)
+    SELECT SUM(menu_item.cost) as cost
     FROM order_items
     JOIN menu_item ON order_items.menu_item = menu_item.id
     WHERE \`order\` = ${orderId}
     GROUP BY \`order\`
+    `);
+  }
+
+  getPendingOrders(){
+    return this._query(`
+    SELECT order_items.id as id, orders.session as sessionId, menu_item.name as name, \`table\`, status
+    FROM order_items
+    JOIN menu_item ON order_items.menu_item = menu_item.id
+    JOIN orders ON order_items.order = orders.id
+    JOIN session ON orders.session = session.id
+    WHERE status IN (1, 2)
+    ORDER BY sessionId
+    `);
+  }
+
+  updateOrderStatus(orderId, status){
+    return this._query(`
+    UPDATE order_items
+    SET status = ${status}
+    WHERE id = ${orderId}
     `);
   }
 

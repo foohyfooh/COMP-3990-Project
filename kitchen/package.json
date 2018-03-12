@@ -1,7 +1,7 @@
 {
-  "name": "restaurant-automation-backend",
+  "name": "restuarant-automation-kitcehn",
   "version": "0.0.1",
-  "description": "Backend for Restaurant Automation Service",
+  "description": "Kitchen System fro Restaurant Automation Service",
   "main": "main.js",
   "author": "Jonathan Herbert",
   "private": true,
@@ -10,8 +10,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "socket.io": "^2.0.4"
+    "express": "^4.16.2"
   }
 }

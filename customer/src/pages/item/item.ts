@@ -25,7 +25,7 @@ export class ItemPage {
   ionViewDidLoad() {}
 
   async orderItem(){
-    await this.sessionManager.addItemToOrder(this.itemId);
+    await this.sessionManager.addItemToOrder(this.itemId, this.itemName);
     this.navCtrl.push(OrdersPage);
   }
 

@@ -9,17 +9,17 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     let qr = new QrCode();
     qr.callback = (err, value) => {
         if (err) {
-            console.error(err);
-            return;
+          console.error(err);
+          return;
         }
-        qrResultCallback(value.result);
         if(interval) clearInterval(interval);
+        qrResultCallback(value.result);
     };
     qr.decode(img);
   }
   
   function checkoutSession(sessionUUID){
-    fetch('http://localhost:8080/session/checkout/', {
+    fetch('http://localhost:8080/session/checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -47,7 +47,9 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     interval = setInterval(handleCheckout, 2000);
   });
 
-  navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+  navigator.mediaDevices
+  .getUserMedia({ video: true })
+  .then(stream => {
     video.src = window.URL.createObjectURL(stream);
     video.play();
     scanButton.click();

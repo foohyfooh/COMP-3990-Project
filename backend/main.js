@@ -1,13 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const {SessionManager, OrdersManager, MenuManager, SubMenuManager, ItemManager, CheckoutManager, StatusConstants} = require('./db');
+
+//Handle CORS
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+//Get body as JSON
 app.use(bodyParser.json());
-const {SessionManager, OrdersManager, MenuManager, SubMenuManager, ItemManager, CheckoutManager} = require('./db');
+
+//Socket connections for clients and kitchen
+let clientConnections = {};
+let kitchenConnections = {};
 
 //Start a session
 app.post('/session', async (req, res) => {
@@ -19,7 +28,7 @@ app.post('/session', async (req, res) => {
     sessionManager.disconnect();
     res.json(session);
   }catch(e){
-    res.status(500).json(e);
+    res.status(500).json({error: e});;
   }
 });
 
@@ -33,7 +42,7 @@ app.post('/order', async (req, res) => {
     ordersManager.disconnect();
     res.json({order});
   }catch(e){
-    res.status(500).json(e);
+    res.status(500).json({error: e});;
   }
 });
 
@@ -47,24 +56,50 @@ app.get('/order/:orderId', async (req, res) => {
     ordersManager.disconnect();
     res.json(orders);
   }catch(e){
-    res.status(500).json(e);
+    res.status(500).json({error: e});;
   }
+});
+
+//Socket for status updates between the kitchen and the customers
+io.on('connection', socket => {
+  //Register connections
+  socket.on('customer-register', data => {
+    let id = data.id;
+    clientConnections[id] = socket.id;
+  });
+
+  socket.on('kitchen-register', data => {
+    let id = data.id;
+    kitchenConnections[id] = socket.id;
+  });
 });
 
 //Add Item to Order
 app.post('/order/:orderId/add_item', async (req, res) => {
   let orderId = req.params.orderId;
+  let sessionId = req.body.sessionId;
   let menuItemId = req.body.menuItemId;
+  let name = req.body.name;
+  let table = req.body.table;
   try{
     let ordersManager = new OrdersManager();
     await ordersManager.connect();
-    await ordersManager.addItemToOrders(orderId, menuItemId);
+    let orderItemId = await ordersManager.addItemToOrder(orderId, menuItemId);
     ordersManager.disconnect();
+    for(let kitchenId in kitchenConnections){
+      io.to(kitchenConnections[kitchenId]).emit('kitchen-add-item', {
+        sessionId: sessionId,
+        id: orderItemId,
+        name: name,
+        table: table,
+        status: StatusConstants.STATUS_ORDERING
+      });
+    }
     res.json({
       'message': 'Item Added'
     });
   }catch(e){
-    res.status(500).json(e);
+    res.status(500).json({error: e});;
   }
 });
 
@@ -77,7 +112,7 @@ app.get('/menu', async (req, res) => {
     menuManager.disconnect()
     res.json(categories);
   }catch(e){
-    res.status(500).json(e);
+    res.status(500).json({error: e});;
   }
 });
 
@@ -91,7 +126,7 @@ app.get('/menu/:category', async (req, res) => {
     subMenuManager.disconnect();
     res.json(menuItems);
   }catch(e){
-    res.status(500).json(e);
+    res.status(500).json({error: e});;
   }
 });
 
@@ -105,12 +140,12 @@ app.get('/menu/item/:itemId', async (req, res) => {
     itemManager.disconnect();
     res.json(item);
   }catch(e){
-    res.status(500).json(e);
+    res.status(500).json({error: e});;
   }
 });
 
 //Do the checkout for the orders of a session
-app.post('/session/checkout/', async (req, res) => {
+app.post('/session/checkout', async (req, res) => {
   let session = req.body.session;
   try{
     let checkoutManager = new CheckoutManager();
@@ -121,11 +156,48 @@ app.post('/session/checkout/', async (req, res) => {
       'message': 'Checkout Complete'
     });
   }catch(e){
-    res.status(500).json(e);
+   res.status(500).json({error: e});
+  }
+});
+
+//Display all orders that show be in the kitchen
+app.get('/orders', async (req, res) => {
+  try{
+    let ordersManager = new OrdersManager();
+    await ordersManager.connect();
+    let orders = await ordersManager.getPendingOrders();
+    ordersManager.disconnect();
+    res.json(orders);
+  }catch(e){
+    res.status(500).json({error: e});
+  }
+});
+
+//Update the status of an order item
+app.post('/order/:orderItemId/status', async (req, res) => {
+  let orderItemId = req.params.orderItemId;
+  let sessionId = req.body.sessionId;
+  let status = req.body.status;
+  try{
+    let ordersManager = new OrdersManager();
+    await ordersManager.connect();
+    await ordersManager.updateOrderStatus(orderItemId, status);
+    ordersManager.disconnect();
+    if(clientConnections[sessionId]){
+      io.to(clientConnections[sessionId]).emit('customer-update', {
+        orderItemId: orderItemId,
+        status: status
+      });
+    }
+    res.json({
+      'message': 'Status Updated'
+    });
+  }catch(e){
+    res.status(500).json({error: e});
   }
 });
 
 //Start the server
-app.listen(8080, () => {
+server.listen(8080, () => {
   console.log('Listening on port 8080');
 });

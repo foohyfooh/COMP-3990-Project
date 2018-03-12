@@ -33,9 +33,14 @@ export class SessionManagerProvider {
    * Add an item to the order
    * @param itemId The item to add to your order
    */
-  public async addItemToOrder(itemId: number){
+  public async addItemToOrder(itemId: number, name: string){
+    let sessionId = this.state.getSessionInfo().id;
     let orderId = this.state.getOrder().order;
+    let table = this.state.getTable();
     return this.http.post(`http://localhost:8080/order/${orderId}/add_item/`, {
+      sessionId: sessionId,
+      name: name,
+      table: table,
       menuItemId: itemId
     }).toPromise();
   }
