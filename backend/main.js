@@ -60,20 +60,6 @@ app.get('/order/:orderId', async (req, res) => {
   }
 });
 
-//Socket for status updates between the kitchen and the customers
-io.on('connection', socket => {
-  //Register connections
-  socket.on('customer-register', data => {
-    let id = data.id;
-    clientConnections[id] = socket.id;
-  });
-
-  socket.on('kitchen-register', data => {
-    let id = data.id;
-    kitchenConnections[id] = socket.id;
-  });
-});
-
 //Add Item to Order
 app.post('/order/:orderId/add_item', async (req, res) => {
   let orderId = req.params.orderId;
@@ -144,6 +130,20 @@ app.get('/menu/item/:itemId', async (req, res) => {
   }
 });
 
+//Get recommendations based on a specified menu item
+app.get('/menu/item/:itemId/recommendations', async (req, res) => {
+  let itemId = req.params.itemId;
+  try{
+    let itemManager = new ItemManager();
+    await itemManager.connect();
+    let recommendations = await itemManager.getRecommendations(itemId);
+    itemManager.disconnect();
+    res.json(recommendations);
+  }catch(e){
+    res.status(500).json({error: e});;
+  }
+});
+
 //Do the checkout for the orders of a session
 app.post('/session/checkout', async (req, res) => {
   let session = req.body.session;
@@ -196,6 +196,21 @@ app.post('/order/:orderItemId/status', async (req, res) => {
     res.status(500).json({error: e});
   }
 });
+
+//Socket for status updates between the kitchen and the customers
+io.on('connection', socket => {
+  //Register connections
+  socket.on('customer-register', data => {
+    let id = data.id;
+    clientConnections[id] = socket.id;
+  });
+
+  socket.on('kitchen-register', data => {
+    let id = data.id;
+    kitchenConnections[id] = socket.id;
+  });
+});
+
 
 //Start the server
 server.listen(8080, () => {

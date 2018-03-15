@@ -21,6 +21,7 @@ import { SubMenuManagerProvider } from '../providers/submenu-manager';
 import { MenuItemComponent } from '../components/menu-item/menu-item';
 import { OrderItemComponent } from '../components/order-item/order-item';
 import { QrScreenComponent } from '../components/qr-screen/qr-screen';
+import { ItemManagerProvider } from '../providers/item-manager';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { QrScreenComponent } from '../components/qr-screen/qr-screen';
     StateProvider,
     SessionManagerProvider,
     MenuManagerProvider,
-    SubMenuManagerProvider
+    SubMenuManagerProvider,
+    ItemManagerProvider
   ]
 })
 export class AppModule {}

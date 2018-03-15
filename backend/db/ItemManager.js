@@ -14,6 +14,17 @@ class ItemManager extends DatabaseManager {
     `);
   }
 
+  async getRecommendations(itemId){
+    let item = (await this.getItem(itemId))[0];
+    let lowerCostBound = item.cost - 5, upperCostBound = item.cost + 5;
+    return this._query(`
+    SELECT id, name, description, cost
+    FROM menu_item
+    WHERE id != ${itemId} AND category = ${item.category}
+    AND cost BETWEEN ${lowerCostBound} AND ${upperCostBound}
+    `);
+  }
+
 }
 
 exports.ItemManager = ItemManager;
