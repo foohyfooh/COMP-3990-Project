@@ -8,4 +8,6 @@ node cashier/main.js &
 P3=$!
 node kitchen/main.js &
 P4=$!
-wait $P1 $P2 $P3 $P4
+node business/main.js &
+P5=$!
+wait $P1 $P2 $P3 $P4 $P5

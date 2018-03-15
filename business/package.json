@@ -1,0 +1,15 @@
+{
+  "name": "restuarant-automation-business",
+  "version": "0.0.1",
+  "description": "Business Application for Restuarant Automation Service",
+  "main": "main.js",
+  "author": "Jonathan Herbert",
+  "private": true,
+  "scripts": {
+    "serve": "node main.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
