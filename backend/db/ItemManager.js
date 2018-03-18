@@ -4,7 +4,7 @@ class ItemManager extends DatabaseManager {
 
   /**
    * Get the details for a desired menu item
-   * @param {number} itemId The desired menu item`
+   * @param {number} itemId The desired menu item
    */
   getItem(itemId){
     return this._query(`
@@ -14,6 +14,10 @@ class ItemManager extends DatabaseManager {
     `);
   }
 
+  /**
+   * Get recommendations based on a menu item
+   * @param {number} itemId The item to base recommendations on
+   */
   async getRecommendations(itemId){
     let item = (await this.getItem(itemId))[0];
     let lowerCostBound = item.cost - 5, upperCostBound = item.cost + 5;

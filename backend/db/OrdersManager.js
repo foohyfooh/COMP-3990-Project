@@ -55,6 +55,9 @@ class OrdersManager extends DatabaseManager {
     `);
   }
 
+  /**
+   * Get the order items that are not ready
+   */
   getPendingOrders(){
     return this._query(`
     SELECT order_items.id as id, orders.session as sessionId, menu_item.name as name, \`table\`, status
@@ -67,11 +70,16 @@ class OrdersManager extends DatabaseManager {
     `);
   }
 
-  updateOrderStatus(orderId, status){
+  /**
+   * Update the status of a menu item
+   * @param {number} menuItemId The menu item whose status to update
+   * @param {number} status The status to set
+   */
+  updateOrderStatus(menuItemId, status){
     return this._query(`
     UPDATE order_items
     SET status = ${status}
-    WHERE id = ${orderId}
+    WHERE id = ${menuItemId}
     `);
   }
 

@@ -5,6 +5,11 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
   let outputContainer = document.getElementById('output');
   let interval = undefined;
 
+  /**
+   * Decode a QR code to get the session UUID
+   * @param {string} img The image to decode
+   * @param {function} qrResultCallback The function to call when the QR code is successfully scanned
+   */
   function decodeQRCode(img, qrResultCallback){
     let qr = new QrCode();
     qr.callback = (err, value) => {
@@ -18,6 +23,10 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     qr.decode(img);
   }
   
+  /**
+   * Checkout a session
+   * @param {string} sessionUUID The session to checkout
+   */
   function checkoutSession(sessionUUID){
     fetch('http://localhost:8080/session/checkout', {
       method: 'POST',
@@ -35,6 +44,9 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     });
   }
   
+  /**
+   * Do the processing to checkout a customer
+   */
   function handleCheckout(){
     let canvas = document.createElement('canvas');
     canvas.width = video.videoWidth;
@@ -43,10 +55,12 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     decodeQRCode(canvas.toDataURL(), checkoutSession);
   }
 
+  //Add click listener to initial the QR code scanning process
   scan.addEventListener('click', event => {
     interval = setInterval(handleCheckout, 2000);
   });
 
+  //Get the camera of the device and start the scanning process
   navigator.mediaDevices
   .getUserMedia({ video: true })
   .then(stream => {

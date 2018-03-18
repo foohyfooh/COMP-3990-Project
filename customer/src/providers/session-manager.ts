@@ -32,6 +32,7 @@ export class SessionManagerProvider {
   /**
    * Add an item to the order
    * @param itemId The item to add to your order
+   * @param name The name of the item
    */
   public async addItemToOrder(itemId: number, name: string){
     let sessionId = this.state.getSessionInfo().id;
