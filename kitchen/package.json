@@ -1,7 +1,7 @@
 {
   "name": "restuarant-automation-kitcehn",
   "version": "0.0.1",
-  "description": "Kitchen System fro Restaurant Automation Service",
+  "description": "Kitchen System for Restaurant Automation Service",
   "main": "main.js",
   "author": "Jonathan Herbert",
   "private": true,

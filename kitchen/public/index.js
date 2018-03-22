@@ -23,16 +23,16 @@ function sendUpdate(sessionId, orderItemId, status){
  */
 function addItemToContainer(orderItem){
   let orderDiv = document.importNode(orderItemTemplate, true);
-  let name = orderDiv.querySelector('.name');
-  let table = orderDiv.querySelector('.table');
-  let status = orderDiv.querySelector('.status');
-  let sendUpdate = orderDiv.querySelector('.update');
+  let nameSpan = orderDiv.querySelector('.name');
+  let tableSpan = orderDiv.querySelector('.table');
+  let statusSelector = orderDiv.querySelector('.status');
+  let sendUpdateButton = orderDiv.querySelector('.update');
 
   orderDiv.id += orderItem.id;
-  name.innerHTML = orderItem.name;
-  table.innerHTML = orderItem.table;
-  status.value = orderItem.status;
-  sendUpdate.addEventListener('click', event => sendUpdate(orderItem.sessionId, orderItem.id, status.value));
+  nameSpan.innerHTML = orderItem.name;
+  tableSpan.innerHTML = orderItem.table;
+  statusSelector.value = orderItem.status;
+  sendUpdateButton.addEventListener('click', event => sendUpdate(orderItem.sessionId, orderItem.id, statusSelector.value));
 
   ordersContainer.appendChild(orderDiv);
 }
