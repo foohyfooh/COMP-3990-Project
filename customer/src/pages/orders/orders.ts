@@ -48,8 +48,12 @@ export class OrdersPage {
   registerSocket(){
     this.socket = io.connect('http://localhost:8080');
     this.socket.on('customer-update', data => {
-      //TODO: Get the correct order item and update its status
-      console.log(data);
+      for (let i = 0; i < this.orderItems.length; i++) {
+        if(this.orderItems[i].id === data.orderItemId){
+          this.orderItems[i].status = data.status;
+          break;
+        }
+      }
     });
     this.socket.emit('customer-register', {'id': this.state.getSessionInfo().id});
   }

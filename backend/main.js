@@ -185,8 +185,8 @@ app.post('/order/:orderItemId/status', async (req, res) => {
     ordersManager.disconnect();
     if(clientConnections[sessionId]){
       io.to(clientConnections[sessionId]).emit('customer-update', {
-        orderItemId: orderItemId,
-        status: status
+        orderItemId: Number.parseInt(orderItemId),
+        status: Number.parseInt(status)
       });
     }
     res.json({
