@@ -13,6 +13,7 @@ declare const QRCodeReader;
 export class StartPage {
 
   @ViewChild('camera') private camera: ElementRef;
+  private stream: MediaStream = undefined;
   private interval = undefined;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController, 
@@ -41,7 +42,7 @@ export class StartPage {
         }
         let result = Number.parseInt(value.result);
         if(!Number.isNaN(result)){
-          clearInterval(this.interval);
+          this.stopCameraPolling();
           await this.sessionManager.createSession(result);
           this.navCtrl.push(MenuPage);
         }        
@@ -52,6 +53,7 @@ export class StartPage {
   submitTableNumberViaCamera(){
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+        this.stream = stream;
         this.camera.nativeElement.src = window.URL.createObjectURL(stream);
         this.camera.nativeElement.play();
         this.interval = setInterval(this.pollCamera.bind(this), 1000);
@@ -59,8 +61,16 @@ export class StartPage {
     }
   }
 
+  stopCameraPolling(){
+    if(!this.stream) return;
+    if(this.interval) clearInterval(this.interval);
+    this.stream.getVideoTracks().forEach(track => track.stop());
+  }
+
   openTableNumberModal(){
+    this.stopCameraPolling();
     let modal = this.modalCtrl.create(TableEntryComponent);
+    modal.onDidDismiss(() => this.submitTableNumberViaCamera());
     modal.present();
   }
 
