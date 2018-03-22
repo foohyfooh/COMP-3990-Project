@@ -10,8 +10,8 @@ class ItemManager extends DatabaseManager {
     return this._query(`
     SELECT name, category, description, cost
     FROM menu_item
-    WHERE id = ${itemId}
-    `);
+    WHERE id = ?
+    `, [itemId]);
   }
 
   /**
@@ -24,9 +24,9 @@ class ItemManager extends DatabaseManager {
     return this._query(`
     SELECT id, name, description, cost
     FROM menu_item
-    WHERE id != ${itemId} AND category = ${item.category}
-    AND cost BETWEEN ${lowerCostBound} AND ${upperCostBound}
-    `);
+    WHERE id != ? AND category = ?
+    AND cost BETWEEN ? AND ?
+    `, [itemId, item.category, lowerCostBound, upperCostBound]);
   }
 
 }

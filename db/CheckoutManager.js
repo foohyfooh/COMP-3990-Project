@@ -18,8 +18,8 @@ class CheckoutManager extends DatabaseManager {
     return this._query(`
     UPDATE \`session\`
     SET paid = b'1'
-    WHERE id = ${sessionId}
-    `);
+    WHERE id = ?
+    `, [sessionId]);
   }
 
   /**
@@ -30,8 +30,8 @@ class CheckoutManager extends DatabaseManager {
     return this._query(`
     UPDATE \`session\`
     SET paid = b'1'
-    WHERE uuid = '${sessionUUID}'
-    `);
+    WHERE uuid = ?
+    `, [sessionUUID]);
   }
   
 }

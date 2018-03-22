@@ -10,8 +10,8 @@ class SubMenuManager extends DatabaseManager {
     return this._query(`
     SELECT id, name, description, cost
     FROM menu_item
-    WHERE category = ${categoryId}
-    `);
+    WHERE category = ?
+    `, [categoryId]);
   }
 
 }

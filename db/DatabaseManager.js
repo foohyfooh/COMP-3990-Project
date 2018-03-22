@@ -18,19 +18,12 @@ class DatabaseManager {
   /**
    * Run a query on the database connection
    * @param {string} q MySQL query
+   * @param {any[]} [params] The values from the query
    */
-  _query(q){
+  _query(q, params){
     if(this._connection)
-      return this._connection.query(q)
+      return this._connection.query(q, params);
     return Promise.reject('Connnection not established');
-  }
-
-  /**
-   * Sanitize a value to be put into the database
-   * @param {*} value Value
-   */
-  _sanitizeValue(value){
-    return value;
   }
 
   /** 

@@ -9,13 +9,13 @@ class SessionManager extends DatabaseManager {
   async createSession(table){
     let insertResult = await this._query(`
     INSERT INTO session(\`table\`)
-    VALUES (${table})
-    `);
+    VALUES (?)
+    `, [table]);
     return (await this._query(`
     SELECT id, uuid
     FROM \`session\`
-    WHERE id = ${insertResult.insertId}
-    `))[0];
+    WHERE id = ?
+    `, [insertResult.insertId]))[0];
   }
 
 }

@@ -50,9 +50,9 @@ class OrdersManager extends DatabaseManager {
     SELECT SUM(menu_item.cost) as cost
     FROM order_items
     JOIN menu_item ON order_items.menu_item = menu_item.id
-    WHERE \`order\` = ${orderId}
+    WHERE \`order\` = ?
     GROUP BY \`order\`
-    `);
+    `, [orderId]);
   }
 
   /**
@@ -78,9 +78,9 @@ class OrdersManager extends DatabaseManager {
   updateOrderStatus(menuItemId, status){
     return this._query(`
     UPDATE order_items
-    SET status = ${status}
-    WHERE id = ${menuItemId}
-    `);
+    SET status = ?
+    WHERE id = ?
+    `, [status, menuItemId]);
   }
 
 }
