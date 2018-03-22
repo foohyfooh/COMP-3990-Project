@@ -199,8 +199,8 @@ UserInterfaceState.xcuserstate
 
 # End of Ionic .gitignore contents
 
-# Backend 
+# DB 
 
-backend/config.json
+db/config.json
 
-# End of Backend 
+# End of DB 

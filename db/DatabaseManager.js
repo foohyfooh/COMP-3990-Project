@@ -1,5 +1,5 @@
 const mysql =  require('promise-mysql');
-const utils = require('../utils');
+const utils = require('./utils');
 const config = utils.readConfig();
 
 class DatabaseManager {

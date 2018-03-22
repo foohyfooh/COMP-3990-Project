@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-const {SessionManager, OrdersManager, MenuManager, SubMenuManager, ItemManager, CheckoutManager, StatusConstants} = require('./db');
+const {SessionManager, OrdersManager, MenuManager, SubMenuManager, ItemManager, CheckoutManager, StatusConstants} = require('../db');
 
 //Handle CORS
 app.use(function(req, res, next) {

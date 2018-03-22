@@ -1,7 +1,7 @@
 {
   "name": "db",
   "version": "0.0.1",
-  "description": "Database Module for Restaurat Automation Backend",
+  "description": "Database Module for Restaurant Automation Backend",
   "main": "index.js",
   "author": "Jonathan Herbert",
   "license": "MIT",
