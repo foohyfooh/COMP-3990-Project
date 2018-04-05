@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Review Session</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <label for="rating">Rating</label>
+  <input #rating id="rating" name="rating" type="range" min="0" max="5"><br>
+  <label for="comment">Comment</label>
+  <textarea #comment id="comment" name="comment" cols="30" rows="10"></textarea>
+  <button ion-button full (click)="submitReview()">Submit</button>
+</ion-content>

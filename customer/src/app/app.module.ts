@@ -22,6 +22,7 @@ import { MenuItemComponent } from '../components/menu-item/menu-item';
 import { OrderItemComponent } from '../components/order-item/order-item';
 import { QrScreenComponent } from '../components/qr-screen/qr-screen';
 import { ItemManagerProvider } from '../providers/item-manager';
+import { ReviewPage } from '../pages/review/review';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ItemManagerProvider } from '../providers/item-manager';
     MenuCategoryComponent,
     MenuItemComponent,
     OrderItemComponent,
-    QrScreenComponent
+    QrScreenComponent,
+    ReviewPage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import { ItemManagerProvider } from '../providers/item-manager';
     SubMenuPage,
     ItemPage,
     OrdersPage,
-    QrScreenComponent
+    QrScreenComponent,
+    ReviewPage
   ],
   providers: [
     StatusBar,

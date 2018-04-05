@@ -54,5 +54,15 @@ export class SessionManagerProvider {
     return this.http.get<OrderItem[]>(`http://localhost:8080/order/${orderId}`).toPromise();
   }
 
+  /**
+   * Add a review to a session
+   * @param rating The rating for the session
+   * @param comment Optional Comment to add
+   */
+  public async postReview(rating: number, comment?: string){
+    let sessionId = this.state.getSessionInfo().id;
+    return this.http.post(`http://localhost:8080/review`, {sessionId, rating, comment}).toPromise();
+  }
+
 }
 

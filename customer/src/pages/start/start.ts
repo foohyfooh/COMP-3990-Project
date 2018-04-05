@@ -57,6 +57,9 @@ export class StartPage {
         this.camera.nativeElement.src = window.URL.createObjectURL(stream);
         this.camera.nativeElement.play();
         this.interval = setInterval(this.pollCamera.bind(this), 1000);
+      })
+      .catch(e => {
+        console.log(e);
       });
     }
   }

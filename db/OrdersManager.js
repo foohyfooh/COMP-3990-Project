@@ -47,7 +47,7 @@ class OrdersManager extends DatabaseManager {
    */
   getOrderTotal(orderId){
     return this._query(`
-    SELECT SUM(menu_item.cost) as cost
+    SELECT SUM(menu_item.cost) AS cost
     FROM order_items
     JOIN menu_item ON order_items.menu_item = menu_item.id
     WHERE \`order\` = ?
@@ -60,7 +60,7 @@ class OrdersManager extends DatabaseManager {
    */
   getPendingOrders(){
     return this._query(`
-    SELECT order_items.id as id, orders.session as sessionId, menu_item.name as name, \`table\`, status
+    SELECT order_items.id AS id, orders.session AS sessionId, menu_item.name AS name, \`table\`, status
     FROM order_items
     JOIN menu_item ON order_items.menu_item = menu_item.id
     JOIN orders ON order_items.order = orders.id

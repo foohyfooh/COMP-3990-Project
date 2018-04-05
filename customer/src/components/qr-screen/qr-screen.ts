@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { StateProvider } from '../../providers/state';
-import { ViewController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+import { ReviewPage } from '../../pages/review/review';
+import { HomePage } from '../../pages/home/home';
 
 @Component({
   selector: 'qr-screen',
@@ -10,12 +11,17 @@ export class QrScreenComponent {
 
   private code: string;
 
-  constructor(private navParams: NavParams, private viewCtrl: ViewController, private state: StateProvider) {
+  constructor(private navCtrl: NavController, private navParams: NavParams) {
     this.code = this.navParams.get('code');
   }
 
+  review(){
+    this.navCtrl.push(ReviewPage);
+  }
+
   close(){
-    this.viewCtrl.dismiss();
+    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.popToRoot();
   }
 
 }

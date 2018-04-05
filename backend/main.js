@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-const {SessionManager, OrdersManager, MenuManager, SubMenuManager, ItemManager, CheckoutManager, StatusConstants} = require('../db');
+const {SessionManager, OrdersManager, MenuManager, SubMenuManager, ItemManager, CheckoutManager, StatusConstants, ReviewManager} = require('../db');
 
 //Handle CORS
 app.use(function(req, res, next) {
@@ -28,7 +28,7 @@ app.post('/session', async (req, res) => {
     sessionManager.disconnect();
     res.json(session);
   }catch(e){
-    res.status(500).json({error: e});;
+    res.status(500).json({error: e});
   }
 });
 
@@ -42,7 +42,7 @@ app.post('/order', async (req, res) => {
     ordersManager.disconnect();
     res.json({order});
   }catch(e){
-    res.status(500).json({error: e});;
+    res.status(500).json({error: e});
   }
 });
 
@@ -56,7 +56,7 @@ app.get('/order/:orderId', async (req, res) => {
     ordersManager.disconnect();
     res.json(orders);
   }catch(e){
-    res.status(500).json({error: e});;
+    res.status(500).json({error: e});
   }
 });
 
@@ -85,7 +85,7 @@ app.post('/order/:orderId/add_item', async (req, res) => {
       'message': 'Item Added'
     });
   }catch(e){
-    res.status(500).json({error: e});;
+    res.status(500).json({error: e});
   }
 });
 
@@ -98,7 +98,7 @@ app.get('/menu', async (req, res) => {
     menuManager.disconnect()
     res.json(categories);
   }catch(e){
-    res.status(500).json({error: e});;
+    res.status(500).json({error: e});
   }
 });
 
@@ -112,7 +112,7 @@ app.get('/menu/:category', async (req, res) => {
     subMenuManager.disconnect();
     res.json(menuItems);
   }catch(e){
-    res.status(500).json({error: e});;
+    res.status(500).json({error: e});
   }
 });
 
@@ -126,7 +126,7 @@ app.get('/menu/item/:itemId', async (req, res) => {
     itemManager.disconnect();
     res.json(item);
   }catch(e){
-    res.status(500).json({error: e});;
+    res.status(500).json({error: e});
   }
 });
 
@@ -140,7 +140,7 @@ app.get('/menu/item/:itemId/recommendations', async (req, res) => {
     itemManager.disconnect();
     res.json(recommendations);
   }catch(e){
-    res.status(500).json({error: e});;
+    res.status(500).json({error: e});
   }
 });
 
@@ -191,6 +191,23 @@ app.post('/order/:orderItemId/status', async (req, res) => {
     }
     res.json({
       'message': 'Status Updated'
+    });
+  }catch(e){
+    res.status(500).json({error: e});
+  }
+});
+
+app.post('/review', async (req, res) => {
+  let sessionId = req.body.sessionId;
+  let rating = req.body.rating;
+  let comment = req.body.comment;
+  try{
+    let reviewManager = new ReviewManager();
+    await reviewManager.connect();
+    await reviewManager.postReview(sessionId, rating, comment);
+    reviewManager.disconnect();
+    res.json({
+      'message': 'Review Added'
     });
   }catch(e){
     res.status(500).json({error: e});
