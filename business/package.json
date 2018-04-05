@@ -4,12 +4,13 @@
   "description": "Business Application for Restuarant Automation Service",
   "main": "main.js",
   "author": "Jonathan Herbert",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "serve": "node main.js"
   },
-  "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.3"
   }
 }

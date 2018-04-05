@@ -7,6 +7,17 @@
   <title>Restuarant Automation Management</title>
 </head>
 <body>
+  <p>Get the sales between the specified dates (If no dates are specified all will be returned)</p>
+  <div class="input">
+    <label for="from">Start Date</label>
+    <input id="from" type="date">
+  </div>
+  <div class="input">
+      <label for="to">End Date</label>
+      <input id="to" type="date">
+    </div>
+  <button id="getSales">Get Sales Records</button>
+  <div id="sales"></div>
   <script src="index.js" defer></script>
 </body>
 </html>
