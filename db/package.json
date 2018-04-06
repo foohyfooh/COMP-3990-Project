@@ -1,5 +1,5 @@
 {
-  "name": "db",
+  "name": "restaurant-automation-db",
   "version": "0.0.1",
   "description": "Database Module for Restaurant Automation Backend",
   "main": "index.js",
