@@ -43,7 +43,7 @@ function addItemToContainer(orderItem){
 async function getExistingOrders(){
   let res = await fetch('http://localhost:8080/orders');
   let items = await res.json();
-  items.forEach(addItemToContainer)
+  items.forEach(addItemToContainer);
 }
 
 //Handle New Orders and Updates

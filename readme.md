@@ -15,9 +15,9 @@
 - [design](/design) - Designs and Diagrams.
 - [database](/database) - MySQL database schema.
 - [backend](/backend) - Express server interacting with the MySQL database.
-- [db](/db) - Database module for the backend
+- [db](/db) - Database module for the backend.
 - [customer](/customer) - Ionic Application for customer interaction.
 - [business](/business) - Business Application for checking sales and other business functions.
 - [cashier](/cashier) - Checkout Application for Cashier.
 - [kitchen](/kitchen) - Kitchen Application to update order statuses.
-
+- [frontend](/frontend) - Group the non-customer applications into one.

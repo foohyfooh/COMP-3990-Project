@@ -1,0 +1,13 @@
+{
+  "name": "restaurant-automation-frontend",
+  "version": "0.0.1",
+  "description": "Frontend for Restaurtant Automation Service",
+  "author": "Jonathan Herbert",
+  "license": "MIT",
+  "main": "main.js",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}

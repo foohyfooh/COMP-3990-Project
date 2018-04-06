@@ -21,6 +21,4 @@ app.post('/sales', async (req, res) => {
   }
 });
 
-app.listen(8083, () => {
-  console.log('Listening on port 8083');
-});
+module.exports  = app;
