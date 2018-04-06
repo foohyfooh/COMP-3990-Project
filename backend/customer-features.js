@@ -1,5 +1,4 @@
-const {SessionManager, OrdersManager, MenuManager, SubMenuManager,
-  ItemManager, StatusConstants, ReviewManager} = require('../db');
+const {SessionManager, OrdersManager, MenuManager, StatusConstants, ReviewManager} = require('../db');
 
 function c(app, io, kitchenConnections){
   //Start a session
@@ -90,10 +89,10 @@ function c(app, io, kitchenConnections){
   app.get('/menu/:category', async (req, res) => {
     let category = req.params.category;
     try{
-      let subMenuManager = new SubMenuManager();
-      await subMenuManager.connect();
-      let menuItems = await subMenuManager.getItemsFromCategory(category);
-      subMenuManager.disconnect();
+      let menuManager = new MenuManager();
+      await menuManager.connect();
+      let menuItems = await menuManager.getItemsFromCategory(category);
+      menuManager.disconnect();
       res.json(menuItems);
     }catch(e){
       res.status(500).json({error: e});
@@ -104,10 +103,10 @@ function c(app, io, kitchenConnections){
   app.get('/menu/item/:itemId', async (req, res) => {
     let itemId = req.params.itemId;
     try{
-      let itemManager = new ItemManager();
-      await itemManager.connect();
-      let item = await itemManager.getItem(itemId);
-      itemManager.disconnect();
+      let menuManager = new MenuManager();
+      await menuManager.connect();
+      let item = await menuManager.getItem(itemId);
+      menuManager.disconnect();
       res.json(item);
     }catch(e){
       res.status(500).json({error: e});
@@ -118,10 +117,10 @@ function c(app, io, kitchenConnections){
   app.get('/menu/item/:itemId/recommendations', async (req, res) => {
     let itemId = req.params.itemId;
     try{
-      let itemManager = new ItemManager();
-      await itemManager.connect();
-      let recommendations = await itemManager.getRecommendations(itemId);
-      itemManager.disconnect();
+      let menuManager = new MenuManager();
+      await menuManager.connect();
+      let recommendations = await menuManager.getRecommendations(itemId);
+      menuManager.disconnect();
       res.json(recommendations);
     }catch(e){
       res.status(500).json({error: e});

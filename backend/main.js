@@ -34,6 +34,7 @@ io.on('connection', socket => {
 require('./customer-features')(app, io, kitchenConnections);
 require('./cashier-features')(app);
 require('./kitchen-features')(app, io, clientConnections);
+require('./menu-features')(app);
 require('./business-features')(app);
 
 //Start the server
