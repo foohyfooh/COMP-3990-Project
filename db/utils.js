@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
- function readConfig(){
+function readConfig(){
   let contents;
   try{
     contents = fs.readFileSync(__dirname + path.sep + 'config.json', {encoding: 'utf8'});

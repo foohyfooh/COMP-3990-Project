@@ -8,11 +8,7 @@ class DatabaseManager {
    * Connect to the MySQL database
   */
   async connect(){
-    try {
-      this._connection = await mysql.createConnection(config);
-    }catch(error){
-      console.log(error);
-    }
+    this._connection = await mysql.createConnection(config);
   }
 
   /**
