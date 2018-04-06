@@ -29,7 +29,7 @@ getSales.addEventListener('click', async event => {
   let sales = await res.json();
   let content = '<p><b>Sales</b></p>';
   for(let sale of sales){
-    content += `<p>Sale ${new Date(sale.date).toDateString()} on ${sale.table} earned $${sale.cost}</p>`;
+    content += `<p>Sale on ${new Date(sale.date).toDateString()} at table ${sale.table} earned $${sale.cost}</p>`;
   }
   salesContainer.innerHTML = content;
 });
