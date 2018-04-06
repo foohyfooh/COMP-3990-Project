@@ -50,7 +50,8 @@ CREATE TABLE `menu_item` (
   `name` varchar(45) NOT NULL,
   `category` int(11) NOT NULL,
   `cost` decimal(5,2) NOT NULL,
-  `description` varchar(80) NOT NULL
+  `description` varchar(80) NOT NULL,
+  `image` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
