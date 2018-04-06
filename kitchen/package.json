@@ -1,5 +1,5 @@
 {
-  "name": "restuarant-automation-kitcehn",
+  "name": "restaurant-automation-kitcehn",
   "version": "0.0.1",
   "description": "Kitchen System for Restaurant Automation Service",
   "main": "main.js",
@@ -10,6 +10,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.3"
   }
 }

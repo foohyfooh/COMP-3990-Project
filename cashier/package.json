@@ -1,5 +1,5 @@
 {
-  "name": "restuarant-automation-cashier",
+  "name": "restaurant-automation-cashier",
   "version": "0.0.1",
   "description": "Cashier System for Restaurant Automation Service",
   "main": "main.js",
@@ -10,7 +10,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.2",
+    "express": "^4.16.3",
     "qrcode-reader": "^1.0.4"
   }
 }
