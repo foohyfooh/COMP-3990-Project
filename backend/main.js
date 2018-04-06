@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-const {SessionManager, OrdersManager, MenuManager, SubMenuManager, ItemManager, CheckoutManager, StatusConstants, ReviewManager} = require('../db');
+const {SessionManager, OrdersManager, MenuManager, SubMenuManager,
+  ItemManager, CheckoutManager, StatusConstants, ReviewManager, SalesManager} = require('../db');
 
 //Handle CORS
 app.use(function(req, res, next) {
@@ -228,8 +229,19 @@ io.on('connection', socket => {
   });
 });
 
+//Get a list of sales
+app.post('/sales', async (req, res) => {
+  let from = req.body.from, to = req.body.to;
+  try{
+    let salesManager = new SalesManager();
+    await salesManager.connect();
+    let sales = await salesManager.getSales(from, to);
+    res.json(sales);
+  }catch(e){
+    console.log(e);
+    res.status(500).json({error: e});
+  }
+});
 
 //Start the server
-server.listen(8080, () => {
-  console.log('Listening on port 8080');
-});
+server.listen(8080, () => console.log('Listening on port 8080'));

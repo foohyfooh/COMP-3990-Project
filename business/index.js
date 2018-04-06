@@ -16,7 +16,7 @@ function getMaxTimeofDate(date){
 getSales.addEventListener('click', async event => {
   let fromValue = fromDateInput.value;
   let toValue = toDateInput.value;
-  let res = await fetch('http://localhost:8200/business/sales', {
+  let res = await fetch('http://localhost:8080/sales', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
