@@ -1,6 +1,7 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -93,6 +94,21 @@ CREATE TABLE `order_items` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Triggers `order_items`
+--
+DROP TRIGGER IF EXISTS `updateIngredientCounts`;
+DELIMITER $$
+CREATE TRIGGER `updateIngredientCounts` AFTER UPDATE ON `order_items` FOR EACH ROW BEGIN
+	IF NEW.status = 3 THEN
+		UPDATE ingredients 
+        SET stock = stock - 1 
+        WHERE id IN (SELECT `ingredient` FROM `menu_item_ingredient` WHERE `menu_item` = NEW.menu_item);
+	END IF;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -154,11 +170,6 @@ CREATE TABLE `status` (
   `description` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Truncate table before insert `status`
---
-
-TRUNCATE TABLE `status`;
 --
 -- Dumping data for table `status`
 --
@@ -259,6 +270,11 @@ ALTER TABLE `menu_item`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `session`
