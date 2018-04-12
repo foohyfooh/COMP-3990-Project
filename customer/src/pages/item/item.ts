@@ -15,6 +15,7 @@ export class ItemPage {
   private itemName: string;
   private itemCost: number;
   private itemDescription: string;
+  private itemImage: string;
   private recommendations: MenuItem[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
@@ -23,6 +24,7 @@ export class ItemPage {
     this.itemName = this.navParams.get('name');
     this.itemCost = this.navParams.get('cost');
     this.itemDescription = this.navParams.get('description');
+    this.itemImage = this.navParams.get('image');
     this.recommendations = [];
   }
 

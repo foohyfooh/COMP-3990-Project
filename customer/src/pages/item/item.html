@@ -5,10 +5,14 @@
 </ion-header>
 <ion-content padding>
   {{itemName}} <br>
+  <img src="{{itemImage}}" alt="{{itemName}}"><br>
   Cost: ${{itemCost}}
   <button ion-button full (click)="orderItem()">Order {{itemName}}</button>
   <hr>
+  Recommendations:
+  <hr>
   <div class="recommendation" *ngFor="let recommendation of recommendations" (click)="gotoRecommendation(recommendation)">
     {{recommendation.name}}
+    <hr>
   </div>
 </ion-content>

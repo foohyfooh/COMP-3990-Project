@@ -12,6 +12,7 @@ export class MenuItemComponent {
   @Input() private name: string;
   @Input() private description: string;
   @Input() private cost: number;
+  @Input() private image: string;
 
   constructor(private navCtrl: NavController) {}
 
@@ -20,7 +21,8 @@ export class MenuItemComponent {
       id: this.id,
       name: this.name,
       description: this.description,
-      cost: this.cost
+      cost: this.cost,
+      image: this.image
     });
   }
 

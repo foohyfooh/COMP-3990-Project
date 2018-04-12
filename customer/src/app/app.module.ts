@@ -13,7 +13,6 @@ import { SubMenuPage } from '../pages/submenu/submenu';
 import { ItemPage } from '../pages/item/item';
 import { OrdersPage } from '../pages/orders/orders';
 import { StateProvider } from '../providers/state';
-import { TableEntryComponent } from '../components/table-entry/table-entry';
 import { SessionManagerProvider } from '../providers/session-manager';
 import { MenuManagerProvider } from '../providers/menu-manager';
 import { MenuCategoryComponent } from '../components/menu-category/menu-category';
@@ -33,7 +32,6 @@ import { ReviewPage } from '../pages/review/review';
     SubMenuPage,
     ItemPage,
     OrdersPage,
-    TableEntryComponent,
     MenuCategoryComponent,
     MenuItemComponent,
     OrderItemComponent,
@@ -51,7 +49,6 @@ import { ReviewPage } from '../pages/review/review';
     HomePage,
     StartPage,
     MenuPage,
-    TableEntryComponent,
     SubMenuPage,
     ItemPage,
     OrdersPage,

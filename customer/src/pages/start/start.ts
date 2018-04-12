@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { TableEntryComponent } from '../../components/table-entry/table-entry';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { StateProvider } from '../../providers/state';
 import { SessionManagerProvider } from '../../providers/session-manager';
 import { MenuPage } from '../menu/menu';
 declare const QRCodeReader;
@@ -15,9 +15,9 @@ export class StartPage {
   @ViewChild('camera') private camera: ElementRef;
   private stream: MediaStream = undefined;
   private interval = undefined;
+  @ViewChild('table') private tableInput: ElementRef;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController, 
-    private sessionManager: SessionManagerProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private state:StateProvider, private sessionManager: SessionManagerProvider) {
   }
 
   ionViewDidLoad() {
@@ -70,11 +70,13 @@ export class StartPage {
     this.stream.getVideoTracks().forEach(track => track.stop());
   }
 
-  openTableNumberModal(){
-    this.stopCameraPolling();
-    let modal = this.modalCtrl.create(TableEntryComponent);
-    modal.onDidDismiss(() => this.submitTableNumberViaCamera());
-    modal.present();
+  async submitTableViaInput(){
+    let tableValue = this.tableInput.nativeElement.value;
+    if(tableValue === '') return;
+    let table = Number.parseInt(tableValue);
+    this.state.seTable(table);
+    await this.sessionManager.createSession(table);
+    this.navCtrl.push(MenuPage);
   }
 
   

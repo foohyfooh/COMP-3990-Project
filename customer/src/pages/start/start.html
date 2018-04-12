@@ -7,5 +7,10 @@
   <div id="cameraContainer">
     <video #camera id="camera"></video>
   </div>
-  <button ion-button full (click)="openTableNumberModal()">Enter Table #</button>
+  <div>OR</div>
+  <div>
+      <label for="table">Table Number</label>
+      <input #table type="number" id="table">
+  </div>
+  <button ion-button full (click)="submitTableViaInput()">Enter Table #</button>
 </ion-content>
