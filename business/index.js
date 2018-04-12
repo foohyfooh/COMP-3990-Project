@@ -1,7 +1,7 @@
-let getSales = document.querySelector('#getSales');
-let fromDateInput = document.querySelector('#from');
-let toDateInput = document.querySelector('#to');
-let salesContainer = document.querySelector('#sales');
+const getSales = document.querySelector('#getSales');
+const fromDateInput = document.querySelector('#from');
+const toDateInput = document.querySelector('#to');
+const salesContainer = document.querySelector('#sales');
 
 function getMinTimeofDate(date){
   date.setHours(0, 0, 0, 0);
