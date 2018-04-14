@@ -1,5 +1,9 @@
 # COMP 3990 Project - Restaurant Automation
 
+## Members
+[Jonathan Herbert](https://github.com/foohyfooh) \
+[Karunesh Ramdass](https://github.com/KhaosReighn17)
+
 ## Environment Specification
 - Node 8.9.0
 - npm 5.5.1
