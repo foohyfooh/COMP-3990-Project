@@ -30,6 +30,27 @@ function generateCategory(category){
   let newItemDescInput = categoryDiv.querySelector('.addItem input.desc');
   let newItemImageInput = categoryDiv.querySelector('.addItem input.image'); 
   let addItemButton = categoryDiv.querySelector('.addItem button.add');
+  let uploadItem = (item) => {
+    return fetch('http://localhost:8080/menu/item/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(item)
+    })
+    .then(res => {
+      if(res.ok){
+        newItemNameInput.value = '';
+        newItemCostInput.value = '';
+        newItemDescInput.value = '';
+        newItemImageInput.value = '';
+        items.appendChild(generateMenuItem(item));  
+      }else{
+        alert('Error with adding menu item');
+      }
+    })
+    .catch(e => console.log(e));
+  };
 
   name.innerHTML = category.name;
   for(let item of category.items) items.appendChild(generateMenuItem(item));
@@ -40,25 +61,24 @@ function generateCategory(category){
     let imageFile = newItemImageInput.files[0];
     
     if((nameValue === '' || costValue === '')) return;
-
-    let reader = new FileReader();
-    reader.onloadend = () => {
-      // console.log(reader.result);
-      fetch('http://localhost:8080/menu/item/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name: nameValue,
-          cost: Number.parseFloat(costValue),
-          description: descValue,
-          category: category.id,
-          image: reader.result
-        })
-      });
+    let item = {
+      name: nameValue,
+      cost: Number.parseFloat(costValue),
+      description: descValue,
+      category: category.id,
+      image: ''
     };
-    reader.readAsDataURL(imageFile);
+
+    if(imageFile){
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        item.image = reader.result;
+        uploadItem(item);
+      };
+      reader.readAsDataURL(imageFile);
+    }else{
+      uploadItem(item);
+    }
   });
 
   return categoryDiv;
