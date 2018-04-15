@@ -11,7 +11,8 @@ function c(app, io, kitchenConnections){
       sessionManager.disconnect();
       res.json(session);
     }catch(e){
-      res.status(500).json({error: e});
+      console.log(e);
+      res.status(500).json({error: e.toString()});
     }
   });
 
@@ -25,7 +26,8 @@ function c(app, io, kitchenConnections){
       ordersManager.disconnect();
       res.json({order});
     }catch(e){
-      res.status(500).json({error: e});
+      console.log(e);
+      res.status(500).json({error: e.toString()});
     }
   });
 
@@ -39,7 +41,8 @@ function c(app, io, kitchenConnections){
       ordersManager.disconnect();
       res.json(orders);
     }catch(e){
-      res.status(500).json({error: e});
+      console.log(e);
+      res.status(500).json({error: e.toString()});
     }
   });
 
@@ -68,7 +71,8 @@ function c(app, io, kitchenConnections){
         'message': 'Item Added'
       });
     }catch(e){
-      res.status(500).json({error: e});
+      console.log(e);
+      res.status(500).json({error: e.toString()});
     }
   });
 
@@ -81,7 +85,8 @@ function c(app, io, kitchenConnections){
       menuManager.disconnect()
       res.json(categories);
     }catch(e){
-      res.status(500).json({error: e});
+      console.log(e);
+      res.status(500).json({error: e.toString()});
     }
   });
 
@@ -95,7 +100,8 @@ function c(app, io, kitchenConnections){
       menuManager.disconnect();
       res.json(menuItems);
     }catch(e){
-      res.status(500).json({error: e});
+      console.log(e);
+      res.status(500).json({error: e.toString()});
     }
   });
 
@@ -109,7 +115,8 @@ function c(app, io, kitchenConnections){
       menuManager.disconnect();
       res.json(item);
     }catch(e){
-      res.status(500).json({error: e});
+      console.log(e);
+      res.status(500).json({error: e.toString()});
     }
   });
 
@@ -123,7 +130,8 @@ function c(app, io, kitchenConnections){
       menuManager.disconnect();
       res.json(recommendations);
     }catch(e){
-      res.status(500).json({error: e});
+      console.log(e);
+      res.status(500).json({error: e.toString()});
     }
   });
 
@@ -136,7 +144,8 @@ function c(app, io, kitchenConnections){
       ordersManager.disconnect();
       res.json(orders);
     }catch(e){
-      res.status(500).json({error: e});
+      console.log(e);
+      res.status(500).json({error: e.toString()});
     }
   });
 
@@ -153,7 +162,8 @@ function c(app, io, kitchenConnections){
         'message': 'Review Added'
       });
     }catch(e){
-      res.status(500).json({error: e});
+      console.log(e);
+      res.status(500).json({error: e.toString()});
     }
   });
 }

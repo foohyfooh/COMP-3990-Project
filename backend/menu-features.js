@@ -16,7 +16,8 @@ function m(app){
       });
       res.json(fullMenu);
     }catch(e){
-      res.status(500).json({error: e});
+      console.log(e);
+      res.status(500).json({error: e.toString()});
     }
   });
 
@@ -33,7 +34,8 @@ function m(app){
       await menuManager.addItemToCategory(category, name, cost, desc, image);
       res.json({'message':'Item Add to Menu'});
     }catch(e){
-      res.status(500).json({error: e});
+      console.log(e);
+      res.status(500).json({error: e.toString()});
     }
   });
 }

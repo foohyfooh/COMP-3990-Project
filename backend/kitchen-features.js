@@ -21,7 +21,8 @@ function k(app, io, clientConnections){
         'message': 'Status Updated'
       });
     }catch(e){
-      res.status(500).json({error: e});
+      console.log(e);
+      res.status(500).json({error: e.toString()});
     }
   });
 }
