@@ -5,4 +5,9 @@ function zip(...arrs) {
     .map((_, i) => arrs.map(a => a[i]));
 }
 
+function flatten(arr) {
+  return Array.prototype.concat.apply([], arr);
+}
+
 exports.zip = zip;
+exports.flatten = flatten;

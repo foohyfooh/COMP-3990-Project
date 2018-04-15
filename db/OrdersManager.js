@@ -1,5 +1,5 @@
 const {DatabaseManager} = require('./DatabaseManager');
-const {STATUS_ORDERING} = require('./StatusConstants');
+const {STATUS_ORDERING, STATUS_CANCELLED} = require('./StatusConstants');
 
 class OrdersManager extends DatabaseManager {
 
@@ -10,9 +10,22 @@ class OrdersManager extends DatabaseManager {
   async startOrder(sessionId){
     let insertResult = await this._query(`
     INSERT INTO orders (\`session\`)
-    VALUES (${sessionId})
-    `);
+    VALUES (?)
+    `, [sessionId]);
     return insertResult.insertId;
+  }
+
+  /**
+   * Get all the order ids associated with a session
+   * @param {number} sessionId 
+   */
+  async getOrdersForSession(sessionId){
+    let orderRows = await this._query(`
+    SELECT id
+    FROM orders
+    WHERE \`session\` = ?
+    `, [sessionId]);
+    return orderRows.map(row => row.id);
   }
 
   /**
@@ -24,8 +37,8 @@ class OrdersManager extends DatabaseManager {
     SELECT menu_item.id, menu_item.name AS name, menu_item.cost AS cost, order_items.status AS status
     FROM order_items
     JOIN menu_item ON menu_item.id = order_items.menu_item
-    WHERE order_items.order = ${orderId}
-    `);
+    WHERE order_items.order = ? AND order_items.status != ${STATUS_CANCELLED}
+    `, [orderId]);
   }
 
   /**
@@ -36,8 +49,8 @@ class OrdersManager extends DatabaseManager {
   async addItemToOrder(orderId, menuItemId){
     let insertResult = await this._query(`
     INSERT INTO order_items (\`order\`, menu_item, status)
-    VALUES(${orderId}, ${menuItemId}, ${STATUS_ORDERING})
-    `);
+    VALUES(?, ?, ${STATUS_ORDERING})
+    `, [orderId, menuItemId]);
     return insertResult.insertId;
   }
 
@@ -50,7 +63,7 @@ class OrdersManager extends DatabaseManager {
     SELECT SUM(menu_item.cost) AS cost
     FROM order_items
     JOIN menu_item ON order_items.menu_item = menu_item.id
-    WHERE \`order\` = ?
+    WHERE \`order\` = ? AND order_items.status != ${STATUS_CANCELLED}
     GROUP BY \`order\`
     `, [orderId]);
   }

@@ -1,7 +1,6 @@
 const {SessionManager} = require('./SessionManager');
 const {MenuManager} = require('./MenuManager');
 const {OrdersManager} = require('./OrdersManager');
-const {CheckoutManager} = require('./CheckoutManager');
 const StatusConstants = require('./StatusConstants');
 const {ReviewManager} = require('./ReviewManager'); 
 const {SalesManager} = require('./SalesManager');
@@ -9,7 +8,6 @@ const {SalesManager} = require('./SalesManager');
 exports.SessionManager = SessionManager;
 exports.MenuManager = MenuManager;
 exports.OrdersManager = OrdersManager;
-exports.CheckoutManager = CheckoutManager;
 exports.StatusConstants = StatusConstants;
 exports.ReviewManager = ReviewManager;
 exports.SalesManager = SalesManager;
