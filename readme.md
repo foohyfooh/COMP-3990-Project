@@ -8,7 +8,8 @@
 - Node 8.9.0
 - npm 5.5.1
 - cordova 8.0.0
-- ionic 3.19.1
+- ionic 3.20.0
+- MySQL 5.6
 
 ## Running
 ```
