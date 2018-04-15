@@ -23,12 +23,17 @@
 - MySQL 5.6
 
 ## Setup
--  Import the [restaurant_automation.sql](/database/restaurant_automation.sql) into MySQL
+- Import the [restaurant_automation.sql](/database/restaurant_automation.sql) into MySQL
 - Add a config.json file in [db](/db) with the following fields:
   - host
   - database
   - user
   - password
+- Run ```npm  install``` in the following directories:
+  - [db](/db)
+  - [backend](/backend)
+  - [customer](/customer)
+  - [frontend](/frontend)
 
 ## Running
 ```
