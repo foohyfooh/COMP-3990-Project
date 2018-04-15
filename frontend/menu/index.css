@@ -1,5 +1,14 @@
+#main-header {
+  text-align: center;
+}
+
 .category{
-  border-bottom: 1px solid black;
+  width: 95vw !important;
+  margin: 10px auto;
+}
+
+.category .name {
+  font-weight: bold;
 }
 
 .item {

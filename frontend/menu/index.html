@@ -6,8 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Restaurtant Automation Menu</title>
   <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="/static/mdl/material.min.css">
+  <script src="/static/mdl/material.min.js" defer></script>
 </head>
 <body>
+  <h1 id="main-header">Menu</h1>
   <div id="menu"></div>
   <template id="template-item">
     <div class="item">
@@ -17,18 +20,18 @@
     </div>
   </template>
   <template id="template-category">
-    <div class="category">
-      <b><p class="name"></p></b>
+    <div class="category mdl-card mdl-shadow--2dp">
+      <h2 class="name"></h2>
       <div class="items"></div>
       <div class="addItem">
         <div class="input"><label>Name: <input class="name" type="text" placeholder="Name"></label></div>
         <div class="input"><label>Cost: <input class="cost" type="number" min="0" step="0.50" placeholder="Cost"></label></div>
         <div class="input"><label>Description: <input class="desc" type="text" placeholder="Description"></label></div>
         <div class="input"><label>Image: <input class="image" type="file"></label></div>
-        <button class="add">Add New Item</button>
+        <button class="add mdl-button mdl-js-button mdl-button--raised">Add New Item</button>
       </div>
     </div>
   </template>
-  <script src="index.js"></script>
+  <script src="index.js" defer></script>
 </body>
 </html>
