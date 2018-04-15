@@ -22,13 +22,13 @@ function sendUpdate(sessionId, orderItemId, status){
  * @param {object} orderItem The order item to display
  */
 function addItemToContainer(orderItem){
-  let orderDiv = document.importNode(orderItemTemplate, true);
+  let orderDiv = document.importNode(orderItemTemplate, true).querySelector('.item');
   let nameSpan = orderDiv.querySelector('.name');
   let tableSpan = orderDiv.querySelector('.table');
   let statusSelector = orderDiv.querySelector('.status');
   let sendUpdateButton = orderDiv.querySelector('.update');
 
-  orderDiv.id += orderItem.id;
+  orderDiv.setAttribute('id', 'i' + orderItem.id);
   nameSpan.innerHTML = orderItem.name;
   tableSpan.innerHTML = orderItem.table;
   statusSelector.value = orderItem.status;

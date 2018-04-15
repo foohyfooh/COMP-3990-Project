@@ -5,19 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Restaurant Automation Kitchen</title>
+  <link rel="stylesheet" href="/static/mdl/material.min.css">
+  <script src="/static/mdl/material.min.js" defer></script>
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
+  <h1 id="main-header">Kitchen</h1> 
   <div id="ordersContainer"></div>  
   <template id="template-orderItem">
-    <div id="item">
+    <div class="item">
       <p><span class="name"></span> on table <span class="table"></span></p>
       <select class="status" name="status">
         <option value="1">Ordering</option>
         <option value="2">Preparing</option>
         <option value="3">Ready</option>
         <option value="4">Cancelled</option>
-        <option value="5">At Table</option>
-        <option value="6">Picked Up</option>
       </select>
       <button class="update">Update</button>
     </div>
