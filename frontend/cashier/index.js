@@ -48,10 +48,10 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
    * @param {string} sessionUUID 
    */
   function displaySessionInfo(sessionUUID){
-    fetch(`http://localhost:8080/session/checkout`)
+    fetch(`http://localhost:8080/session/${sessionUUID}/details`)
     .then(res => res.json())
     .then(info => {
-      let content = `Cost of ${info.cost}<br><div>`;
+      let content = `Cost = $${info.cost}<br><div>`;
       for(let item of info.items)
         content += `<p>${item.name}, Cost = $${item.cost}</p>`
       content += '</div>'
@@ -77,6 +77,7 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
     decodeQRCode(canvas.toDataURL(), displaySessionInfo);
   }
+
   //Get the camera of the device and start the scanning process
   navigator.mediaDevices
   .getUserMedia({ video: true })

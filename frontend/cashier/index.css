@@ -1,0 +1,12 @@
+body {
+  background: #444444;
+}
+
+#output {
+  padding: 10px;
+}
+
+#checkout {
+  margin: 10px;
+  background: white;
+}
