@@ -17,9 +17,7 @@ function k(app, io, clientConnections){
           status: Number.parseInt(status)
         });
       }
-      res.json({
-        'message': 'Status Updated'
-      });
+      res.json({'message': 'Status Updated'});
     }catch(e){
       console.log(e);
       res.status(500).json({error: e.toString()});

@@ -32,6 +32,7 @@ function m(app){
       let menuManager = new MenuManager();
       await menuManager.connect();
       await menuManager.addItemToCategory(category, name, cost, desc, image);
+      menuManager.disconnect();
       res.json({'message':'Item Add to Menu'});
     }catch(e){
       console.log(e);

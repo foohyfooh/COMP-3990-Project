@@ -28,11 +28,9 @@ function c(app){
     try{
       let sessionManager = new SessionManager();
       await sessionManager.connect();
-      sessionManager.checkoutSession(session);
+      await sessionManager.checkoutSession(session);
       sessionManager.disconnect();
-      res.json({
-        'message': 'Checkout Complete'
-      });
+      res.json({'message': 'Checkout Complete'});
     }catch(e){
       console.log(e);
       res.status(500).json({error: e.toString()});
