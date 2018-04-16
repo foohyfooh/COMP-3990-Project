@@ -6,7 +6,9 @@
   "license": "MIT",
   "main": "main.js",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "serve": "node main.js"
+  },
   "dependencies": {
     "express": "^4.16.3"
   }
