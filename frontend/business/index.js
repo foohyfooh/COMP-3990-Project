@@ -9,7 +9,7 @@ function getMinTimeofDate(date){
 }
 
 function getMaxTimeofDate(date){
-  date.setHours(23, 59, 50, 999);
+  date.setHours(23, 59, 59, 999);
   return date;
 }
 
