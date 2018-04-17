@@ -21,6 +21,7 @@
 - cordova 8.0.0
 - ionic 3.20.0
 - MySQL 5.6
+  - sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES 
 
 ## Setup
 - Import the [restaurant_automation.sql](/database/restaurant_automation.sql) into MySQL
