@@ -10,7 +10,7 @@ class MenuManager extends DatabaseManager {
     SELECT category.id, category.name, COUNT(menu_item.category) AS count 
     FROM category 
     LEFT JOIN menu_item ON category.id = menu_item.category
-    GROUP BY category.name
+    GROUP BY category.id, category.name
     ORDER BY category.id
     `);
   }
