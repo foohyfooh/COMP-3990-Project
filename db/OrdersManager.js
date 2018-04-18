@@ -34,7 +34,7 @@ class OrdersManager extends DatabaseManager {
    */
   getOrderItems(orderId){
     return this._query(`
-    SELECT menu_item.id, menu_item.name AS name, menu_item.cost AS cost, order_items.status AS status
+    SELECT order_items.id, menu_item.id AS menuItemId, menu_item.name AS name, menu_item.cost AS cost, order_items.status AS status
     FROM order_items
     JOIN menu_item ON menu_item.id = order_items.menu_item
     WHERE order_items.order = ? AND order_items.status != ${STATUS_CANCELLED}
