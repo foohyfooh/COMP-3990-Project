@@ -1,3 +1,31 @@
+#start {
+  height:10vh;
+  background-size: cover;
+  background-color: lightsteelblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  text-align:left;
+  text-shadow: 1px 1px #1D2E3D;
+  max-width : 100%;
+ }
+
+.button {
+  background-color: lightslategrey; 
+  color: black;
+  text-align: center;
+  border: none;
+  padding: 20px 30px;
+  font-size: 16px;
+  margin: 5px 3px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
 #cameraContainer {
   text-align: center;
 }
@@ -5,4 +33,21 @@
 #camera {
   height: 300px;
   width: 300px;
+}
+
+#startCont{
+  align-items: center;
+  background-image: url("../../assets/imgs/table.jpg");
+  background-size: cover;
+}
+
+#txt{
+  display: flex;
+  text-align: center;
+  padding-left: 48%;
+  font-size: 30px;
+}
+
+#lbl{
+  font-size: 3vh;
 }

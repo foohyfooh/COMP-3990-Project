@@ -1,3 +1,45 @@
-page-home {
 
+page-home{
+  #start {
+    height:60vh;
+    background-size: cover;
+    background-image : url("../../assets/imgs/restaurant.jpg");
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+    text-shadow: 3px 3px #1D2E3D;
+    max-width : 100%;
+   }
+
+   #cngtxt{
+    max-width: 100%;
+    font-size: 5vw;
+    color: lightcoral;
+    font-family: fantasy;
+   }
+
+  .button {
+    background-color: lightslategrey; 
+    color: black;
+    text-align: center;
+    border: none;
+    padding: 20px 30px;
+    font-size: 16px;
+    margin: 5px 3px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+  }
+
+  #homeCont{
+    background-color: lightcyan;
+  }
+
+  
 }
+
+

@@ -14,12 +14,18 @@ CREATE DATABASE IF NOT EXISTS `restaurant_automation` DEFAULT CHARACTER SET utf8
 USE `restaurant_automation`;
 
 -- --------------------------------------------------------
+DROP TABLE IF EXISTS `order_items`;
+DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `menu_item_ingredient`;
+DROP TABLE IF EXISTS `menu_item`;
+DROP TABLE IF EXISTS `ingredients`;
+DROP TABLE IF EXISTS `category`;
 
 --
 -- Table structure for table `category`
 --
 
-DROP TABLE IF EXISTS `category`;
+
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL
@@ -31,7 +37,7 @@ CREATE TABLE `category` (
 -- Table structure for table `ingredients`
 --
 
-DROP TABLE IF EXISTS `ingredients`;
+
 CREATE TABLE `ingredients` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
@@ -44,7 +50,7 @@ CREATE TABLE `ingredients` (
 -- Table structure for table `menu_item`
 --
 
-DROP TABLE IF EXISTS `menu_item`;
+
 CREATE TABLE `menu_item` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
@@ -60,7 +66,7 @@ CREATE TABLE `menu_item` (
 -- Table structure for table `menu_item_ingredient`
 --
 
-DROP TABLE IF EXISTS `menu_item_ingredient`;
+
 CREATE TABLE `menu_item_ingredient` (
   `menu_item` int(11) NOT NULL,
   `ingredient` int(11) NOT NULL
@@ -72,7 +78,7 @@ CREATE TABLE `menu_item_ingredient` (
 -- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `orders`;
+
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `session` int(11) NOT NULL,
@@ -87,7 +93,7 @@ CREATE TABLE `orders` (
 -- Table structure for table `order_items`
 --
 
-DROP TABLE IF EXISTS `order_items`;
+
 CREATE TABLE `order_items` (
   `id` int(11) NOT NULL,
   `order` int(11) NOT NULL,

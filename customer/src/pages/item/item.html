@@ -1,18 +1,34 @@
-<ion-header>
+<ion-header >
   <ion-navbar>
-    <ion-title>{{itemName}}</ion-title>
+    <ion-title id="start">{{itemName}}</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
-  {{itemName}} <br>
-  <img src="{{itemImage}}" alt="{{itemName}}"><br>
-  Cost: ${{itemCost}}
-  <button ion-button full (click)="orderItem()">Order {{itemName}}</button>
-  <hr>
-  Recommendations:
-  <hr>
-  <div class="recommendation" *ngFor="let recommendation of recommendations" (click)="gotoRecommendation(recommendation)">
-    {{recommendation.name}}
-    <hr>
+
+<ion-content id="itemCont" padding>
+
+  <div >
+      <img id="pic" src="{{itemImage}}" alt="{{itemName}}"><br>
   </div>
+  <br>
+
+  <div id="description">
+    {{itemDescription}}
+  </div>
+  <br>
+  <br>
+
+  <button id="itemOrder" ion-button full (click)="orderItem()">Order {{itemName}}  ${{itemCost}}</button>
+  <hr>
+  <div id="recField">
+      <div id="recommendationTitle">
+          Recommendations:
+      </div>
+      <hr>
+    
+      <div id="recommendation" *ngFor="let recommendation of recommendations" (click)="gotoRecommendation(recommendation)">
+        {{recommendation.name}}
+        <hr>
+      </div>
+  </div>
+
 </ion-content>

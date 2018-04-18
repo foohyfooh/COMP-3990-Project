@@ -1,16 +1,24 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Begin Order</ion-title>
+    <ion-title id="start">
+      Begin Order
+    </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+
+<ion-content id="startCont" padding>
+
   <div id="cameraContainer">
     <video #camera id="camera"></video>
   </div>
-  <div>OR</div>
+  <br>
+  <div id="txt">OR</div>
+  <br>
   <div>
-      <label for="table">Table Number</label>
+      <label id="lbl" for="table">Enter Table Number:</label>
+      <br>
       <input #table type="number" id="table">
   </div>
+  <br><br>
   <button ion-button full (click)="submitTableViaInput()">Enter Table #</button>
 </ion-content>

@@ -1,10 +1,14 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Orders</ion-title>
+    <ion-title id="start">Orders</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+
+<ion-content id="orderCont" padding>
+
   <order-item *ngFor="let order of orderItems" [id]="order.id" [name]="order.name" [cost]="order.cost" [status]="order.status"></order-item>
-  <button ion-button full (click)="gotoMenu()">Add Item</button>
-  <button ion-button full (click)="displayCheckoutCode()">Checkout</button>
+  
+  <button id="orderButtonz"ion-button full (click)="gotoMenu()">Add Item</button>
+  <button id="orderButtonz"ion-button full (click)="displayCheckoutCode()">Checkout</button>
+
 </ion-content>

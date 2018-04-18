@@ -1,12 +1,16 @@
-<ion-header>
+<ion-header >
   <ion-navbar>
-    <ion-title>
-      Restaurant Automation
+    <ion-title id= "start">
+     <h1 id="cngtxt">
+        Restaurant Automation 
+     </h1>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <button ion-button full (click)="gotoTableNumberEntry()">Dine-In</button>
-  <button ion-button full (click)="gotoMenuAsTakeout()">Take-Out</button>
+<ion-content id="homeCont" padding>
+  <div>
+      <button ion-button full (click)="gotoTableNumberEntry()">Dine-In</button>
+      <button ion-button full (click)="gotoMenuAsTakeout()">Take-Out</button>
+  </div>
 </ion-content>

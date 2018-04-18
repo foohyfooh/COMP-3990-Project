@@ -1,5 +1,52 @@
+
+#start {
+  height:10vh;
+  background-size: cover;
+  background-color: lightsteelblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  text-align:left;
+  text-shadow: 1px 1px #1D2E3D;
+  max-width : 100%;
+ }
+
 #category-containers {
   display: flex;
   align-content: space-between;
   flex-flow: column wrap;
 }
+
+
+#menuOrder{
+  background-color: lightslategray; 
+  padding: 20px 20px;
+  display: block;
+  width: 100%;
+}
+
+menu-category div{
+  text-align: center;
+   justify-content: center;
+
+  border :0px;
+  background-color: lightblue;
+  width: 100%;
+  height: 100%;
+
+  font-size: 20px;
+
+}
+
+menu-category div:hover{
+  background-color:lightgreen;
+  color: black;
+}
+
+
+#menuCont{
+  background-image: url("../../assets/imgs/menu.jpg");
+  background-size: 100vw;
+}
+
