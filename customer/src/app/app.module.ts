@@ -19,7 +19,7 @@ import { MenuCategoryComponent } from '../components/menu-category/menu-category
 import { SubMenuManagerProvider } from '../providers/submenu-manager';
 import { MenuItemComponent } from '../components/menu-item/menu-item';
 import { OrderItemComponent } from '../components/order-item/order-item';
-import { QrScreenComponent } from '../components/qr-screen/qr-screen';
+import { CheckoutPage } from '../pages/checkout/checkout';
 import { ItemManagerProvider } from '../providers/item-manager';
 import { ReviewPage } from '../pages/review/review';
 
@@ -35,7 +35,7 @@ import { ReviewPage } from '../pages/review/review';
     MenuCategoryComponent,
     MenuItemComponent,
     OrderItemComponent,
-    QrScreenComponent,
+    CheckoutPage,
     ReviewPage
   ],
   imports: [
@@ -52,7 +52,7 @@ import { ReviewPage } from '../pages/review/review';
     SubMenuPage,
     ItemPage,
     OrdersPage,
-    QrScreenComponent,
+    CheckoutPage,
     ReviewPage
   ],
   providers: [

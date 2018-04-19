@@ -1,0 +1,10 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Checkout</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <img id="qrcode" [src]="code" alt="Checkout Code"/>
+  <button ion-button full (click)="review()">Give Feedback</button>
+  <button ion-button full color="danger" (click)="close()">Close</button>
+</ion-content>

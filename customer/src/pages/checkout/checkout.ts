@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ReviewPage } from '../../pages/review/review';
 import { HomePage } from '../../pages/home/home';
 
+@IonicPage()
 @Component({
-  selector: 'qr-screen',
-  templateUrl: 'qr-screen.html'
+  selector: 'page-checkout',
+  templateUrl: 'checkout.html'
 })
-export class QrScreenComponent {
+export class CheckoutPage {
 
   private code: string;
 

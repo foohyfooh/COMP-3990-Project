@@ -1,55 +1,42 @@
-#start {
-  height:10vh;
+#reviewButton {
+  background-color: lightsteelblue; 
+  color: black;
+  text-align: center;
+  border: none;
+  padding: 20px 30px;
+  font-size: 16px;
+  margin: 5px 3px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+#reviewButton:hover {
+  background-color: lightgreen;
+  color: black;
+}
+
+.labl{
+  font-size: 30px;
+  color:white;
+}
+
+#rating{
+  padding: 20px 30px;
+  width: 50%;
+  display: block;
+  background: lightblue;
+}
+
+#comments{
+  padding: 20px 30px;
+  width: 100vw;
+}
+
+
+#reviewCont{
+  background-image: url("../../assets/imgs/restaurant.jpg");;
   background-size: cover;
-  background-color: lightsteelblue;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: left;
-  text-align:left;
-  text-shadow: 1px 1px #1D2E3D;
-  max-width : 100%;
- }
-
-  #reviewButton {
-    background-color: lightsteelblue; 
-    color: black;
-    text-align: center;
-    border: none;
-    padding: 20px 30px;
-    font-size: 16px;
-    margin: 5px 3px;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    display: block;
-    width: 100%;
-  }
-  
-  #reviewButton:hover {
-    background-color: lightgreen;
-    color: black;
-  }
-  
-  #labl{
-    font-size: 30px;
-    color:white;
-  }
-
-  #rating{
-    padding: 20px 30px;
-    width: 50%;
-    display: block;
-    background: lightblue;
-  }
-  
-  #comments{
-    padding: 20px 30px;
-    width: 100vw;
-  }
- 
-
-  #reviewCont{
-    background-image: url("../../assets/imgs/restaurant.jpg");;
-    background-size: cover;
-  }
+}

@@ -1,9 +1,8 @@
 <ion-header>
   <ion-navbar>
-    <ion-title id="start">{{categoryName}}</ion-title>
+    <ion-title>{{categoryName}}</ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content id="subCont" padding>
   <div id="sub">
     <menu-item id="subOrder" *ngFor="let item of menuItems" [id]="item.id" [name]="item.name" [description]="item.description" [cost]="item.cost" [image]="item.image">

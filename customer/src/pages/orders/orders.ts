@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { SessionManagerProvider } from '../../providers/session-manager';
 import { MenuPage } from '../menu/menu';
-import { QrScreenComponent } from '../../components/qr-screen/qr-screen';
+import { CheckoutPage } from '../checkout/checkout';
 import { StateProvider } from '../../providers/state';
 declare const QRCodeGenerator;
 declare const io;
@@ -17,8 +17,7 @@ export class OrdersPage {
   orderItems: OrderItem[];
   socket;
 
-  constructor(private navCtrl: NavController,  private modalCtrl: ModalController, 
-    private state: StateProvider, private sessionManager: SessionManagerProvider,) {
+  constructor(private navCtrl: NavController, private state: StateProvider, private sessionManager: SessionManagerProvider,) {
   }
 
   async ionViewDidLoad() {
@@ -39,10 +38,9 @@ export class OrdersPage {
     }
   }
 
-  async displayCheckoutCode(){
+  async gotoCheckout(){
     let code = await this.generateQRCode();
-    let modal = this.modalCtrl.create(QrScreenComponent, {code});
-    modal.present();
+    this.navCtrl.push(CheckoutPage, {code})
   }
   
   registerSocket(){

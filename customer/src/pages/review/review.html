@@ -1,20 +1,16 @@
 <ion-header>
   <ion-navbar>
-    <ion-title id="start">Review Session</ion-title>
+    <ion-title>Review Session</ion-title>
   </ion-navbar>
 </ion-header>
-
-<ion-content id="reviewCont"padding>
-
+<ion-content id="reviewCont" padding>
   <div>
-      <label id="labl" for="rating">Rating</label> <br>
+      <label class="labl" for="rating">Rating</label> <br>
       <input #rating id="rating" name="rating" type="range" min="0" max="5"><br>  
   </div>
   <div>
-      <label id="labl" for="comment">Comment</label> <br>
+      <label class="labl" for="comment">Comment</label> <br>
       <textarea #comment id="comment" name="comment" cols="30" rows="10"></textarea>
   </div>
-
   <button id="reviewButton" ion-button full (click)="submitReview()">Submit</button>
-
 </ion-content>
