@@ -10,17 +10,19 @@ import { HomePage } from '../home/home';
 })
 export class ReviewPage {
 
-  @ViewChild('rating') private ratingInput: ElementRef;
-  @ViewChild('comment') private commentInput: ElementRef;
+  private review;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sessionManager: SessionManagerProvider) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sessionManager: SessionManagerProvider) {
+    this.review = {
+      rating: 0,
+      comment: ''
+    };
+  }
 
   ionViewDidLoad() {}
 
   async submitReview(){
-    let rating = Number.parseInt(this.ratingInput.nativeElement.value);
-    let comment = this.commentInput.nativeElement.value;
-    await this.sessionManager.postReview(rating, comment);
+    await this.sessionManager.postReview(this.review.rating, this.review.comment);
     this.navCtrl.setRoot(HomePage);
     this.navCtrl.popToRoot();
   }

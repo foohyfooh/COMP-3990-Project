@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -41,6 +42,7 @@ import { ReviewPage } from '../pages/review/review';
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     IonicModule.forRoot(AppComponent)
   ],
   bootstrap: [IonicApp],

@@ -1,7 +1,12 @@
 page-checkout {
-  background-color: lightcyan;
+  #checkoutContent {
+    background-color: lightcyan;
+    text-align: center;
+  }
+
+  #qrcode {
+    height: 70vh;
+    width: 70vh;
+  }
 }
 
-#qrcode {
-  text-align: center;
-}

@@ -4,13 +4,20 @@
   </ion-navbar>
 </ion-header>
 <ion-content id="reviewCont" padding>
-  <div>
-      <label class="labl" for="rating">Rating</label> <br>
-      <input #rating id="rating" name="rating" type="range" min="0" max="5"><br>  
-  </div>
-  <div>
-      <label class="labl" for="comment">Comment</label> <br>
-      <textarea #comment id="comment" name="comment" cols="30" rows="10"></textarea>
-  </div>
-  <button id="reviewButton" ion-button full (click)="submitReview()">Submit</button>
+  <form>
+    <ion-list>
+      <label class="labl" for="rating">Rating</label>
+      <ion-item class="nobackground">
+        <ion-range #rating id="rating" name="rating" min="0" max="5" pin="true" snaps="true" [(ngModel)]="review.rating">
+          <ion-label range-left>0</ion-label>
+          <ion-label range-right>5</ion-label>
+        </ion-range>
+      </ion-item>
+      <label class="labl" for="comment">Comment</label>
+      <ion-item>
+          <ion-textarea #comment id="comment" name="comment" cols="30" rows="10" [(ngModel)]="review.comment"></ion-textarea>
+      </ion-item>
+      <button id="reviewButton" ion-button full (click)="submitReview()">Submit</button>
+    </ion-list>
+  </form>
 </ion-content>
