@@ -14,18 +14,12 @@ CREATE DATABASE IF NOT EXISTS `restaurant_automation` DEFAULT CHARACTER SET utf8
 USE `restaurant_automation`;
 
 -- --------------------------------------------------------
-DROP TABLE IF EXISTS `order_items`;
-DROP TABLE IF EXISTS `orders`;
-DROP TABLE IF EXISTS `menu_item_ingredient`;
-DROP TABLE IF EXISTS `menu_item`;
-DROP TABLE IF EXISTS `ingredients`;
-DROP TABLE IF EXISTS `category`;
 
 --
 -- Table structure for table `category`
 --
 
-
+DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL
@@ -37,7 +31,7 @@ CREATE TABLE `category` (
 -- Table structure for table `ingredients`
 --
 
-
+DROP TABLE IF EXISTS `ingredients`;
 CREATE TABLE `ingredients` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
@@ -50,7 +44,7 @@ CREATE TABLE `ingredients` (
 -- Table structure for table `menu_item`
 --
 
-
+DROP TABLE IF EXISTS `menu_item`;
 CREATE TABLE `menu_item` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
@@ -66,7 +60,7 @@ CREATE TABLE `menu_item` (
 -- Table structure for table `menu_item_ingredient`
 --
 
-
+DROP TABLE IF EXISTS `menu_item_ingredient`;
 CREATE TABLE `menu_item_ingredient` (
   `menu_item` int(11) NOT NULL,
   `ingredient` int(11) NOT NULL
@@ -78,7 +72,7 @@ CREATE TABLE `menu_item_ingredient` (
 -- Table structure for table `orders`
 --
 
-
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `session` int(11) NOT NULL,
@@ -93,7 +87,7 @@ CREATE TABLE `orders` (
 -- Table structure for table `order_items`
 --
 
-
+DROP TABLE IF EXISTS `order_items`;
 CREATE TABLE `order_items` (
   `id` int(11) NOT NULL,
   `order` int(11) NOT NULL,
@@ -302,28 +296,28 @@ ALTER TABLE `menu_item`
 -- Constraints for table `menu_item_ingredient`
 --
 ALTER TABLE `menu_item_ingredient`
-  ADD CONSTRAINT `ingredient_used` FOREIGN KEY (`ingredient`) REFERENCES `ingredients` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `menu_item_using` FOREIGN KEY (`menu_item`) REFERENCES `menu_item` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `ingredient_used` FOREIGN KEY (`ingredient`) REFERENCES `ingredients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `menu_item_using` FOREIGN KEY (`menu_item`) REFERENCES `menu_item` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `session` FOREIGN KEY (`session`) REFERENCES `session` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `session` FOREIGN KEY (`session`) REFERENCES `session` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `order_items`
 --
 ALTER TABLE `order_items`
-  ADD CONSTRAINT `menu_item` FOREIGN KEY (`menu_item`) REFERENCES `menu_item` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `order` FOREIGN KEY (`order`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `status` FOREIGN KEY (`status`) REFERENCES `status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `menu_item` FOREIGN KEY (`menu_item`) REFERENCES `menu_item` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `order` FOREIGN KEY (`order`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `status` FOREIGN KEY (`status`) REFERENCES `status` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `review`
 --
 ALTER TABLE `review`
-  ADD CONSTRAINT `id` FOREIGN KEY (`id`) REFERENCES `session` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `id` FOREIGN KEY (`id`) REFERENCES `session` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
