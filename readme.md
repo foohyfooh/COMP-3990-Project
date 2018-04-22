@@ -25,6 +25,7 @@
 
 ## Setup
 - Import the [restaurant_automation.sql](/database/restaurant_automation.sql) into MySQL
+- (Optional) Import the [restaurant_automation_data.sql](/database/restaurant_automation_data.sql) 
 - Add a config.json file in [db](/db) with the following fields:
   - host
   - database
