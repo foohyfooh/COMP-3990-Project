@@ -11,9 +11,10 @@
 - [db](/db) - Database module for the backend.
 - [customer](/customer) - Ionic Application for customer interaction.
 - [frontend](/frontend) - Group the non-customer applications into one.
-  - [business](/business) - Business Application for checking sales and other business functions.
-  - [cashier](/cashier) - Checkout Application for Cashier.
-  - [kitchen](/kitchen) - Kitchen Application to update order statuses.
+  - [business](/frontend/business) - Business Application for checking sales and other business functions.
+  - [cashier](/frontend/cashier) - Checkout Application for Cashier.
+  - [kitchen](/frontend/kitchen) - Kitchen Application to update order statuses.
+  - [menu](/frontend/menu) - Menu Application to add items. 
 
 ## Environment Specification
 - Node 8.9.0
@@ -41,3 +42,7 @@
 ```
 > bash run.sh
 ```
+
+- Backend is on port 8080
+- Frontend is on port 8200
+- Customer is on port 8100
